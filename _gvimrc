@@ -1,0 +1,54 @@
+" My gvimrc file
+" Author: Lee Savide <laughingman182@gmail.com>
+" Set the toolbar & scrollbar settings
+set guioptions+=bT
+" OS-dependent options {{{
+if has("gui_win32")
+    setlocal lines=200 columns=200
+    " Set GUI font to Courier New, so Windows knows what to do with Unicode
+    " encoding and still show text in monospaced width
+    setlocal guifont=Courier_New:h10:cANSI
+    " Set the fileformat to Windows, for <CR><LF> line endings
+    setlocal fileformat=dos
+else
+    if has("gui_macvim")
+        setlocal lines=50 columns=180
+        " Set windows to be slightly see-through; MacVim-only
+        setlocal transparency=8
+        nmap <D-s> :w<CR>
+        imap <D-s> <Esc>:w<CR>a
+        setlocal guifont=DejaVu\ Sans\ Mono:h11 fileformat=unix
+    elseif has("gui_gtk2")
+	    set guifont=DejaVu\ Sans\ Mono:h11
+	    set guifontwide=DejaVu\ Sans\ Mono:h11 fileformat=unix
+        setlocal lines=40 columns=180
+        setlocal guifont=Ubuntu
+    endif
+    " Set GUI font to DejaVu Sans Monospaced and give files <LF> line endings
+endif
+" }}}
+" GuiTabLabel {{{
+function GuiTabLabel()
+    let label = ''
+    let bufnrlist = tabpagebuflist(v:lnum)
+    " Add '+' if one of the buffers in the tab page is modified
+    for bufnr in bufnrlist
+        if getbufvar(bufnr, '&modified')
+            let label = '[+] '
+            break
+            break
+        endif
+    endfor
+    " Append the number of windows in the tab page if more than one
+    let wincount = tabpagewinnr(v:lnum, '$')
+    if wincount > 1
+        let label .= wincount
+    endif
+    if label != ''
+        let label .= ' '
+    endif
+    return label
+endfunction
+" }}}
+" See ':help setting-guitablabel'
+set guitablabel=%{GuiTabLabel()}\ %t
