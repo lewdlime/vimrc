@@ -11,7 +11,11 @@ filetype off
 " Load pathogen
 call pathogen#infect()
 " Add vundle to the runtimepath
-set runtimepath+=~/.vim/bundle/vundle/
+if has("win32")
+    set runtimepath+=$VIM\vimfiles\bundle\vundle\
+else
+    set runtimepath+=~/.vim/bundle/vundle/
+endif
 call vundle#rc()
 Bundle 'gmarik/vundle'
 " Required
