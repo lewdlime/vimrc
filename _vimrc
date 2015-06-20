@@ -138,6 +138,7 @@ au FileType txt,none setlocal textwidth=0 foldmethod=marker
 au FileType xml,xhtml,svg,xsl,xslt,fo,rng setlocal textwidth=0 foldmethod=marker
 " Make Java and C code fold on syntax
 au FileType java,c setlocal textwidth=0 foldmethod=syntax
+au Filetype html,xml source $VIM\vimfiles\plugin\wrapwithtag.vim
 " }}}
 " Settings {{{
 
