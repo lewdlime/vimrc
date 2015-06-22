@@ -138,6 +138,7 @@ au FileType txt,none setlocal textwidth=0 foldmethod=marker
 au FileType xml,xhtml,svg,xsl,xslt,fo,rng setlocal textwidth=0 foldmethod=marker
 " Make Java and C code fold on syntax
 au FileType java,c setlocal textwidth=0 foldmethod=syntax
+" Make XML/HTML files have a wrap with tag command using \w
 au Filetype html,xml source $VIM\vimfiles\plugin\wrapwithtag.vim
 " }}}
 " Settings {{{
@@ -152,10 +153,6 @@ runtime macros/matchit.vim
 "let mapleader = ','
 " Sets buffers to be hidden when abandoned, not unloaded. 
 set hidden
-" Turn on the filetype features, filetype plugins, and filetype indent now that
-" vundle is done loading
-filetype on
-filetype plugin indent on
 " Turn syntax on. 'Highlight colors are overruled but links are kept'
 syntax on
 " Use syntax-based omnicomplete, set omnicomplete options
@@ -338,7 +335,9 @@ let g:pep8_map='<leader>8'
 "let g:SuperTabDefaultCompletionType = '<C-X><C-V>'
 "let g:SuperTabDefaultCompletionType = '<C-X><C-O>'
 let g:SuperTabDefaultCompletionType = 'context'
-" Fold XML tags
+" XML.vim: Fold XML tags, enable XML plugin on editing HTML,
+"          set XML tag syntax prefixes, 
+let g:xml_use_html=1
 let g:xml_syntax_folding=1
 " VimClojure
 let g:vimclojure#ParenRainbow = 1
@@ -346,5 +345,11 @@ let g:vimclojure#ParenRainbow = 1
 let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
 " Syntastic
 let g:syntastic_enable_signs=1
+" }}}
+" Filetype {{{
+" Turn on the filetype features, filetype plugins, and filetype indent now that
+" vundle is done loading
+filetype on
+filetype plugin indent on
 " }}}
 " vim: ft=vim
