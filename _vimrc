@@ -56,7 +56,7 @@ Bundle 'alfredodeza/pytest.vim'
 Bundle 'reinh/vim-makegreen'
 Bundle 'vim-scripts/TaskList.vim'
 Bundle 'klen/rope-vim'
-
+Bundle 'maksimr/vim-jsbeautify'
 "Bundle 'laughingman182/abc-vim'
 " Themes
 Bundle 'chriskempson/vim-tomorrow-theme'
@@ -140,6 +140,10 @@ au FileType xml,xhtml,svg,xsl,xslt,fo,rng setlocal textwidth=0 foldmethod=marker
 au FileType java,c setlocal textwidth=0 foldmethod=syntax
 " Make XML/HTML files have a wrap with tag command using \w
 au Filetype html,xml source $VIM\vimfiles\plugin\wrapwithtag.vim
+" jsbeautify
+autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
+autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
+autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
 " }}}
 " Settings {{{
 
