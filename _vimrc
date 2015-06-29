@@ -20,6 +20,9 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 " Required
 " Bundles {{{
+" Snippets
+Bundle 'SirVer/ultisnips'
+Bundle 'honza/vim-snippets'
 " Original Bundles
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
@@ -44,7 +47,6 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'wesleyche/Trinity'
 Bundle 'weierophinney/vimwiki'
 Bundle 'rstacruz/sparkup', {'runtimepath': 'vim/'}
-
 Bundle 'ervandew/supertab'
 Bundle 'fholgado/minibufexpl.vim'
 Bundle 'wincent/Command-T'
@@ -331,6 +333,12 @@ command O call Open()
 map <Leader>o :call Open()<CR>
 " }}}
 " Plugin Options {{{
+" ultisnips
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 " Pyflakes
 let g:pyflakes_use_quickfix = 0
 " PEP8
