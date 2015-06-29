@@ -23,6 +23,11 @@ else
         setlocal transparency=8
         nmap <D-s> :w<CR>
         imap <D-s> <Esc>:w<CR>
+    elseif has("gui_gtk2")
+        set guifont=DejaVu\ Sans\ Mono:h11
+        set guifontwide=DejaVu\ Sans\ Mono:h11 fileformat=unix
+        setlocal lines=40 columns=180
+        setlocal guifont=Ubuntu
     endif
     " Set GUI font to DejaVu Sans Monospaced and give files <LF> line endings
     setlocal guifont=DejaVu\ Sans\ Mono:h11 fileformat=unix
