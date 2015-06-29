@@ -58,3 +58,4 @@ endfunction
 " }}}
 " See ':help setting-guitablabel'
 set guitablabel=%{GuiTabLabel()}\ %t
+" vim: ft=vim

@@ -12,12 +12,12 @@ filetype off
 call pathogen#infect()
 " Add vundle to the runtimepath
 if has("win32")
-    set runtimepath+=$VIM\vimfiles\bundle\vundle\
+    set runtimepath+=$VIM\vimfiles\bundle\Vundle.vim\
 else
-    set runtimepath+=~/.vim/bundle/vundle/
+    set runtimepath+=~/.vim/bundle/Vundle.vim/
 endif
 call vundle#rc()
-Bundle 'gmarik/vundle'
+Bundle 'gmarik/Vundle.vim'
 " Required
 " Bundles {{{
 " Snippets
@@ -70,7 +70,7 @@ Bundle 'Csound-compiler-plugin'
 " }}}
 " Python Segments {{{
 " Assumes Python >= 2.6
-if has('python') 
+if has('python')
 " Quick way to open a filename under the cursor in a new tab
 " (or URL in a browser)
 function! Open()
@@ -157,16 +157,16 @@ autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
 runtime macros/matchit.vim
 " Set leader character to ','
 "let mapleader = ','
-" Sets buffers to be hidden when abandoned, not unloaded. 
+" Sets buffers to be hidden when abandoned, not unloaded.
 set hidden
 " Turn syntax on. 'Highlight colors are overruled but links are kept'
 syntax on
 " Use syntax-based omnicomplete, set omnicomplete options
 set omnifunc=syntaxcomplete#Complete completeopt=menuone,longest,preview
-" Set folding options 
+" Set folding options
 set foldmethod=indent foldlevel=99 foldcolumn=3
 " Tabs converted to 4 spaces
-set shiftwidth=4 tabstop=4 backspace=indent,eol,start expandtab smarttab 
+set shiftwidth=4 tabstop=4 backspace=indent,eol,start expandtab smarttab
 " Set text and file encoding to Unicode, set line endings to UNIX
 set encoding=utf-8 fileencodings=utf-8 fileformat=unix
 if has('gui_running')
@@ -188,7 +188,7 @@ else
     " Sets window to have a title
     set title
     runtime! plugin/google_python_style.vim
-    "colorscheme nuvola 
+    "colorscheme nuvola
     " Color scheme for music editing
     set background=dark
     colorscheme brookstream
@@ -198,7 +198,7 @@ endif
 set laststatus=2
 " clear last format of status line
 set statusline=""
-" buffer number 
+" buffer number
 set statusline+=%-3.3n\
 " filename
 set statusline+=%f\
@@ -352,7 +352,7 @@ let g:pep8_map='<leader>8'
 "let g:SuperTabDefaultCompletionType = '<C-X><C-O>'
 let g:SuperTabDefaultCompletionType = 'context'
 " XML.vim: Fold XML tags, enable XML plugin on editing HTML,
-"          set XML tag syntax prefixes, 
+"          set XML tag syntax prefixes,
 let g:xml_use_html=1
 let g:xml_syntax_folding=1
 " VimClojure
