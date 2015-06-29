@@ -8,23 +8,24 @@ if has("gui_win32")
     " Set GUI font to Courier New, so Windows knows what to do with Unicode
     " encoding and still show text in monospaced width
     setlocal guifont=Courier_New:h10:cANSI
+    " To save, press ctrl-s.
+    nmap <c-s> :w<CR>
+    imap <c-s> <Esc>:w<CR>a
     " Set the fileformat to Windows, for <CR><LF> line endings
     setlocal fileformat=dos
 else
     if has("gui_macvim")
+        " Because MacVim is mean about colorscheme
+        set background=dark
+        colorscheme earendel
         setlocal lines=50 columns=180
         " Set windows to be slightly see-through; MacVim-only
         setlocal transparency=8
         nmap <D-s> :w<CR>
-        imap <D-s> <Esc>:w<CR>a
-        setlocal guifont=DejaVu\ Sans\ Mono:h11 fileformat=unix
-    elseif has("gui_gtk2")
-	    set guifont=DejaVu\ Sans\ Mono:h11
-	    set guifontwide=DejaVu\ Sans\ Mono:h11 fileformat=unix
-        setlocal lines=40 columns=180
-        setlocal guifont=Ubuntu
+        imap <D-s> <Esc>:w<CR>
     endif
     " Set GUI font to DejaVu Sans Monospaced and give files <LF> line endings
+    setlocal guifont=DejaVu\ Sans\ Mono:h11 fileformat=unix
 endif
 " }}}
 " GuiTabLabel {{{

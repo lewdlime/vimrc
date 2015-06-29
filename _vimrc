@@ -171,6 +171,9 @@ set shiftwidth=4 tabstop=4 backspace=indent,eol,start expandtab smarttab
 set encoding=utf-8 fileencodings=utf-8 fileformat=unix
 if has('gui_running')
     if has('mac')
+        " because MacVim is mean
+        set background=dark
+        colorscheme earendel
         set macmeta
     endif
     runtime! plugin/google_python_style.vim
@@ -187,8 +190,9 @@ else
     runtime! plugin/google_python_style.vim
     "colorscheme nuvola 
     " Color scheme for music editing
-    set background=light
+    set background=dark
     colorscheme brookstream
+    aunmenu &Syntax.&Show\ filetypes\ in\ menu
 endif
 " Status line
 set laststatus=2
