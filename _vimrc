@@ -11,15 +11,18 @@ filetype off
 " Load pathogen
 call pathogen#infect()
 " Add vundle to the runtimepath
-if has("win32")
-    set runtimepath+=$VIM\vimfiles\bundle\vundle\
+if has("win32" || "win64")
+    set runtimepath+=$VIM\vimfiles\bundle\Vundle.vim\
 else
-    set runtimepath+=~/.vim/bundle/vundle/
+    set runtimepath+=~/.vim/bundle/Vundle.vim/
 endif
 call vundle#rc()
-Bundle 'gmarik/vundle'
+Bundle 'gmarik/Vundle.vim'
 " Required
 " Bundles {{{
+" Snippets
+Bundle 'SirVer/ultisnips'
+Bundle 'honza/vim-snippets'
 " Original Bundles
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
@@ -31,7 +34,6 @@ Bundle 'gmarik/ide-popup.vim'
 Bundle 'juvenn/mustache.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'mileszs/ack.vim'
-Bundle 'msanders/snipmate.vim'
 Bundle 'nvie/vim-flake8'
 Bundle 'benmills/vimux'
 Bundle 'tpope/vim-fugitive'
@@ -45,9 +47,8 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'wesleyche/Trinity'
 Bundle 'weierophinney/vimwiki'
 Bundle 'rstacruz/sparkup', {'runtimepath': 'vim/'}
-
 Bundle 'ervandew/supertab'
-Bundle 'sontek/minibufexpl.vim'
+Bundle 'fholgado/minibufexpl.vim'
 Bundle 'wincent/Command-T'
 Bundle 'mitechie/pyflakes-pathogen'
 Bundle 'sjl/gundo.vim'
@@ -56,8 +57,8 @@ Bundle 'vim-scripts/pep8'
 Bundle 'alfredodeza/pytest.vim'
 Bundle 'reinh/vim-makegreen'
 Bundle 'vim-scripts/TaskList.vim'
-Bundle 'sontek/rope-vim'
-
+Bundle 'klen/rope-vim'
+Bundle 'maksimr/vim-jsbeautify'
 "Bundle 'laughingman182/abc-vim'
 " Themes
 Bundle 'chriskempson/vim-tomorrow-theme'
@@ -69,7 +70,7 @@ Bundle 'Csound-compiler-plugin'
 " }}}
 " Python Segments {{{
 " Assumes Python >= 2.6
-if has('python') 
+if has('python')
 " Quick way to open a filename under the cursor in a new tab
 " (or URL in a browser)
 function! Open()
@@ -139,6 +140,12 @@ au FileType txt,none setlocal textwidth=0 foldmethod=marker
 au FileType xml,xhtml,svg,xsl,xslt,fo,rng setlocal textwidth=0 foldmethod=marker
 " Make Java and C code fold on syntax
 au FileType java,c setlocal textwidth=0 foldmethod=syntax
+" Make XML/HTML files have a wrap with tag command using \w
+au Filetype html,xml source $VIM\vimfiles\plugin\wrapwithtag.vim
+" jsbeautify
+autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
+autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
+autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
 " }}}
 " Settings {{{
 
@@ -150,24 +157,23 @@ au FileType java,c setlocal textwidth=0 foldmethod=syntax
 runtime macros/matchit.vim
 " Set leader character to ','
 "let mapleader = ','
-" Sets buffers to be hidden when abandoned, not unloaded. 
+" Sets buffers to be hidden when abandoned, not unloaded.
 set hidden
-" Turn on the filetype features, filetype plugins, and filetype indent now that
-" vundle is done loading
-filetype on
-filetype plugin indent on
 " Turn syntax on. 'Highlight colors are overruled but links are kept'
 syntax on
 " Use syntax-based omnicomplete, set omnicomplete options
 set omnifunc=syntaxcomplete#Complete completeopt=menuone,longest,preview
-" Set folding options 
+" Set folding options
 set foldmethod=indent foldlevel=99 foldcolumn=3
 " Tabs converted to 4 spaces
-set shiftwidth=4 tabstop=4 backspace=indent,eol,start expandtab smarttab 
+set shiftwidth=4 tabstop=4 backspace=indent,eol,start expandtab smarttab
 " Set text and file encoding to Unicode, set line endings to UNIX
 set encoding=utf-8 fileencodings=utf-8 fileformat=unix
 if has('gui_running')
     if has('mac')
+        " because MacVim is mean
+        set background=dark
+        colorscheme earendel
         set macmeta
     endif
     runtime! plugin/google_python_style.vim
@@ -182,16 +188,17 @@ else
     " Sets window to have a title
     set title
     runtime! plugin/google_python_style.vim
-    "colorscheme nuvola 
+    "colorscheme nuvola
     " Color scheme for music editing
-    set background=light
+    set background=dark
     colorscheme brookstream
+    aunmenu &Syntax.&Show\ filetypes\ in\ menu
 endif
 " Status line
 set laststatus=2
 " clear last format of status line
 set statusline=""
-" buffer number 
+" buffer number
 set statusline+=%-3.3n\
 " filename
 set statusline+=%f\
@@ -330,6 +337,12 @@ command O call Open()
 map <Leader>o :call Open()<CR>
 " }}}
 " Plugin Options {{{
+" ultisnips
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 " Pyflakes
 let g:pyflakes_use_quickfix = 0
 " PEP8
@@ -338,7 +351,9 @@ let g:pep8_map='<leader>8'
 "let g:SuperTabDefaultCompletionType = '<C-X><C-V>'
 "let g:SuperTabDefaultCompletionType = '<C-X><C-O>'
 let g:SuperTabDefaultCompletionType = 'context'
-" Fold XML tags
+" XML.vim: Fold XML tags, enable XML plugin on editing HTML,
+"          set XML tag syntax prefixes,
+let g:xml_use_html=1
 let g:xml_syntax_folding=1
 " VimClojure
 let g:vimclojure#ParenRainbow = 1
@@ -346,5 +361,11 @@ let g:vimclojure#ParenRainbow = 1
 let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
 " Syntastic
 let g:syntastic_enable_signs=1
+" }}}
+" Filetype {{{
+" Turn on the filetype features, filetype plugins, and filetype indent now that
+" vundle is done loading
+filetype on
+filetype plugin indent on
 " }}}
 " vim: ft=vim
