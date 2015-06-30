@@ -11,7 +11,11 @@ filetype off
 " Load pathogen
 call pathogen#infect()
 " Add vundle to the runtimepath
+<<<<<<< HEAD
 if has("win32" || "win64")
+=======
+if has("win32")
+>>>>>>> fd1686901d735b8111c481bb2aa63addf9a7168d
     set runtimepath+=$VIM\vimfiles\bundle\Vundle.vim\
 else
     set runtimepath+=~/.vim/bundle/Vundle.vim/
@@ -47,7 +51,11 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'wesleyche/Trinity'
 Bundle 'weierophinney/vimwiki'
 Bundle 'rstacruz/sparkup', {'runtimepath': 'vim/'}
+<<<<<<< HEAD
 Bundle 'ervandew/supertab'
+=======
+Bundle 'Valloric/YouCompleteMe'
+>>>>>>> fd1686901d735b8111c481bb2aa63addf9a7168d
 Bundle 'fholgado/minibufexpl.vim'
 Bundle 'wincent/Command-T'
 Bundle 'mitechie/pyflakes-pathogen'
