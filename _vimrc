@@ -47,7 +47,8 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'wesleyche/Trinity'
 Bundle 'weierophinney/vimwiki'
 Bundle 'rstacruz/sparkup', {'runtimepath': 'vim/'}
-Bundle 'ervandew/supertab'
+
+"Bundle 'ervandew/supertab'
 Bundle 'fholgado/minibufexpl.vim'
 Bundle 'wincent/Command-T'
 Bundle 'mitechie/pyflakes-pathogen'
