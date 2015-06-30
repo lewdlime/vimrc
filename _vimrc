@@ -15,7 +15,10 @@ call pathogen#infect()
 if has("win32" || "win64")
 =======
 if has("win32")
+<<<<<<< HEAD
 >>>>>>> fd1686901d735b8111c481bb2aa63addf9a7168d
+=======
+>>>>>>> 129a2b18f8d7696ef86cd6130ddc0092c2033a47
     set runtimepath+=$VIM\vimfiles\bundle\Vundle.vim\
 else
     set runtimepath+=~/.vim/bundle/Vundle.vim/
@@ -52,10 +55,15 @@ Bundle 'wesleyche/Trinity'
 Bundle 'weierophinney/vimwiki'
 Bundle 'rstacruz/sparkup', {'runtimepath': 'vim/'}
 <<<<<<< HEAD
+<<<<<<< HEAD
 Bundle 'ervandew/supertab'
 =======
 Bundle 'Valloric/YouCompleteMe'
 >>>>>>> fd1686901d735b8111c481bb2aa63addf9a7168d
+=======
+
+"Bundle 'ervandew/supertab'
+>>>>>>> 129a2b18f8d7696ef86cd6130ddc0092c2033a47
 Bundle 'fholgado/minibufexpl.vim'
 Bundle 'wincent/Command-T'
 Bundle 'mitechie/pyflakes-pathogen'
