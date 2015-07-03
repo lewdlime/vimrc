@@ -24,7 +24,9 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 " Original Bundles
-Plugin 'rizzatti/dash.vim'
+if has("mac")
+    Plugin 'rizzatti/dash.vim'
+endif
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
