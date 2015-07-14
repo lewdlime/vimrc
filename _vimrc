@@ -45,6 +45,9 @@ Plugin 'tpope/vim-git'
 Plugin 'tpope/vim-cucumber'
 Plugin 'tomtom/quickfixsigns_vim'
 Plugin 'mattn/gist-vim'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
 Plugin 'msanders/snipmate.vim'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'wesleyche/Trinity'
@@ -257,6 +260,26 @@ highlight Pmenu guibg=brown gui=bold
 highlight Pmenu ctermbg=238 gui=bold
 " }}}
 " Functions {{{
+" HighlightRepeats
+function! HighlightRepeats() range
+  let lineCounts = {}
+  let lineNum = a:firstline
+  while lineNum <= a:lastline
+    let lineText = getline(lineNum)
+    if lineText != ""
+      let lineCounts[lineText] = (has_key(lineCounts, lineText) ? lineCounts[lineText] : 0) + 1
+    endif
+    let lineNum = lineNum + 1
+  endwhile
+  exe 'syn clear Repeat'
+  for lineText in keys(lineCounts)
+    if lineCounts[lineText] >= 2
+      exe 'syn match Repeat "^' . escape(lineText, '".\^$*[]') . '$"'
+    endif
+  endfor
+endfunction
+
+command! -range=% HighlightRepeats <line1>,<line2>call HighlightRepeats()
 " diff function {{{
 func MyDiff()
   let opt = '-a --binary '
