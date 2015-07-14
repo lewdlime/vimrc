@@ -10,6 +10,7 @@ set nocompatible nobackup
 filetype off
 " Load pathogen
 call pathogen#infect()
+call pathogen#helptags()
 " Add vundle to the runtimepath
 if has("win32" || "win64")
     set runtimepath+=$VIM\vimfiles\bundle\Vundle.vim\
@@ -34,7 +35,7 @@ Plugin 'sukima/xmledit'
 Plugin 'swaroopch/vim-markdown-preview'
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'gmarik/ide-popup.vim'
-Plugin 'juvenn/mustache.vim'
+Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'kien/ctrlp.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'nvie/vim-flake8'
@@ -43,6 +44,11 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-git'
 Plugin 'tpope/vim-cucumber'
+Plugin 'tpope/vim-flagship'
+Plugin 'tpope/vim-dispatch'
+Plugin 'wincent/terminus'
+Plugin 'wincent/ferret'
+Plugin 'bling/vim-bufferline'
 Plugin 'tomtom/quickfixsigns_vim'
 Plugin 'mattn/gist-vim'
 Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -63,7 +69,7 @@ Plugin 'vim-scripts/pep8'
 Plugin 'alfredodeza/pytest.vim'
 Plugin 'reinh/vim-makegreen'
 Plugin 'vim-scripts/TaskList.vim'
-Plugin 'klen/rope-vim'
+Plugin 'klen/python-mode'
 Plugin 'maksimr/vim-jsbeautify'
 "Plugin 'laughingman182/abc-vim'
 " Themes
