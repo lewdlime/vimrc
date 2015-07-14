@@ -46,9 +46,15 @@ Plugin 'tpope/vim-git'
 Plugin 'tpope/vim-cucumber'
 Plugin 'tpope/vim-flagship'
 Plugin 'tpope/vim-dispatch'
+Plugin 'tpope/vim-abolish'
 Plugin 'wincent/terminus'
 Plugin 'wincent/ferret'
 Plugin 'bling/vim-bufferline'
+Plugin 'Shougo/unite.vim'
+Plugin 'rking/ag.vim'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'triglav/vim-visual-increment'
+Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'tomtom/quickfixsigns_vim'
 Plugin 'mattn/gist-vim'
 Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -407,6 +413,25 @@ let g:vimclojure#ParenRainbow = 1
 let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
 " Syntastic
 let g:syntastic_enable_signs=1
+" Rainbow Parentheses
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'], ]
+let g:rbpt_max = 16
 " }}}
 " Filetype {{{
 " Turn on the filetype features, filetype plugins, and filetype indent now that
