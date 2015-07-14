@@ -48,7 +48,6 @@ Plugin 'mattn/gist-vim'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
-Plugin 'msanders/snipmate.vim'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'wesleyche/Trinity'
 Plugin 'weierophinney/vimwiki'
@@ -147,7 +146,13 @@ au FileType xml,xhtml,svg,xsl,xslt,fo,rng setlocal textwidth=0 foldmethod=marker
 " Make Java and C code fold on syntax
 au FileType java,c setlocal textwidth=0 foldmethod=syntax
 " Make XML/HTML files have a wrap with tag command using \w
-au Filetype html,xml source $VIM\vimfiles\plugin\wrapwithtag.vim
+if has("mac")
+    au Filetype html,xml source $HOME/.vim/plugin/wrapwithtag.vim
+elseif has("win32") || has("win64")
+    au Filetype html,xml source $VIM\vimfiles\plugin\wrapwithtag.vim
+elseif has("gui_gtk2") || has("gui_x11")
+    au Filetype html,xml source $VIM/vimfiles/plugin/wrapwithtag.vim
+endif
 " jsbeautify
 autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
 autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
