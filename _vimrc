@@ -64,7 +64,6 @@ Plugin 'garbas/vim-snipmate'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'wesleyche/Trinity'
 Plugin 'weierophinney/vimwiki'
-Plugin 'rstacruz/sparkup', {'runtimepath': 'vim/'}
 Plugin 'ervandew/supertab'
 Plugin 'fholgado/minibufexpl.vim'
 Plugin 'wincent/Command-T'
@@ -276,6 +275,26 @@ highlight Pmenu guibg=brown gui=bold
 highlight Pmenu ctermbg=238 gui=bold
 " }}}
 " Functions {{{
+" SmartTab completion
+function! SmartTabComplete()
+  let line = getline('.')                         " current line
+  let substr = strpart(line, -1, col('.')+1)      " from the start of the current
+                                                  " line to one character right
+                                                  " of the cursor
+  let substr = matchstr(substr, "[^ \t]*$")       " word till cursor
+  if(strlen(substr)==0)                           " nothing to match on empty string
+    return "\<tab>"
+  endif
+  let has_period = match(substr, '\.') != -1      " position of period, if any
+  let has_slash = match(substr, '\/') != -1       " position of slash, if any
+  if (!has_period && !has_slash)
+    return "\<C-X>\<C-P>"                         " existing text matching
+  elseif(has_slash)
+    return "\<C-X>\<C-F>"                         " file matching
+  else
+    return "\<C-X>\<C-O>"                         " plugin matching
+  endif
+endfunction
 " HighlightRepeats
 function! HighlightRepeats() range
   let lineCounts = {}
@@ -379,8 +398,8 @@ command O call Open()
 map <Leader>o :call Open()<CR>
 " }}}
 " Plugin Options {{{
-" ultisnips
-let g:UltiSnipsExpandTrigger="<tab>"
+" Ultisnips
+" let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " If you want :UltiSnipsEdit to split your window.
