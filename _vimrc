@@ -159,12 +159,10 @@ au FileType xml,xhtml,svg,xsl,xslt,fo,rng setlocal textwidth=0 foldmethod=marker
 " Make Java and C code fold on syntax
 au FileType java,c setlocal textwidth=0 foldmethod=syntax
 " Make XML/HTML files have a wrap with tag command using \w
-if has("mac")
+if has("mac") || has("gui_gtk") || has("gui_x11")
     au Filetype html,xml source $HOME/.vim/plugin/wrapwithtag.vim
 elseif has("win32") || has("win64")
     au Filetype html,xml source $VIM\vimfiles\plugin\wrapwithtag.vim
-elseif has("gui_gtk2") || has("gui_x11")
-    au Filetype html,xml source $VIM/vimfiles/plugin/wrapwithtag.vim
 endif
 " jsbeautify
 autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
