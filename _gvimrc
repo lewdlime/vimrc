@@ -13,7 +13,7 @@ if has("gui_win32")
     imap <c-s> <Esc>:w<CR>a
 else
     if has("gui_macvim")
-        " Because MacVim is mean about colorscheme
+        " Because MacVim is mean
         set background=dark
         colorscheme earendel
         set lines=48 columns=180
@@ -21,6 +21,7 @@ else
         set transparency=8
         nmap <D-s> :w<CR>
         imap <D-s> <Esc>:w<CR>
+        set macmeta
     elseif has("gui_gtk2")
         set lines=40 columns=180
     endif
@@ -34,7 +35,7 @@ else
 endif
 " }}}
 " GuiTabLabel {{{
-function GuiTabLabel()
+function! GuiTabLabel()
     let label = ''
     let bufnrlist = tabpagebuflist(v:lnum)
     " Add '+' if one of the buffers in the tab page is modified

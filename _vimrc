@@ -1,14 +1,15 @@
 " My Vimrc file
 " Maintainer: Lee Savide
 " License: http://apache.org/licenses/LICENSE-2.0.html
-" Use Vim settings, rather then Vi settings (much better!).
+" Use Vim settings, rather then Vi settings
 " This must be first, because it changes other options as a side effect.
-" Also, set for vim to not back up file(s) before saving.
+" Also, set for Vim to not back up file(s) before saving.
 set nocompatible nobackup
 " Vundle Init {{{
 " Filetype MUST be off for vundle!
 filetype off
 " Load pathogen
+" This helps correct the duplicate help tags.
 call pathogen#infect()
 call pathogen#helptags()
 " Add vundle to the runtimepath
@@ -21,7 +22,9 @@ call vundle#rc()
 Plugin 'gmarik/Vundle.vim'
 " Required
 " Bundles {{{
-" Powerline (note: we only need the symbols.)
+" Powerline
+" NOTE: This is only added for the fonts it pulls, do not use powerline
+" itself.
 Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'powerline/fonts'
 " Snippets
@@ -69,12 +72,12 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tomtom/quickfixsigns_vim'
 Plugin 'tomtom/tlib_vim'
 Plugin 'tpope/vim-abolish'
-Plugin 'tpope/vim-cucumber'
 Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-flagship'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-git'
 Plugin 'tpope/vim-pathogen'
+Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'triglav/vim-visual-increment'
 Plugin 'vim-pandoc/vim-pandoc'
@@ -211,11 +214,14 @@ if has('gui_running')
         " because MacVim is mean
         set background=dark
         colorscheme earendel
+        set lines=48 columns=180
+        " Set windows to be slightly see-through; MacVim-only
+        set transparency=8
+        nmap <D-s> :w<CR>
+        imap <D-s> <Esc>:w<CR>
         set macmeta
     endif
     runtime! plugin/google_python_style.vim
-    "colorscheme nuvola
-    " Color scheme for music editing
     set background=dark
     colorscheme earendel
     let do_syntax_sel_menu=1
@@ -459,6 +465,9 @@ let g:airline#extensions#branch#format=1
 let g:airline#extensions#syntastic#enabled=1
 let g:airline#extensions#ctrlp#color_template='insert'
 let g:airline#extensions#ctrlp#show_adjacent_modes=1
+" NOTE: only change tabline to enabled if on Linux or Windows, where the
+" tabline is ugly enought to want it to be controlled by airline. On MacVim,
+" keep the tabline the default.
 let g:airline#extensions#tabline#enabled=0
 let g:airline#extensions#tabline#show_buffers=1
 let g:airline#extensions#tabline#show_tab_nr=1
