@@ -5,29 +5,31 @@ set guioptions+=bT
 " OS-dependent options {{{
 if has("gui_win32")
     setlocal lines=200 columns=200
-    " Set GUI font to Courier New, so Windows knows what to do with Unicode
-    " encoding and still show text in monospaced width
-    setlocal guifont=Courier_New:h10:cANSI
+    " Set GUI font to DejaVu Sans Mono for Powerline
+    " so Windows can actually use a functional font
+    set guifont=DejaVu_Sans_Mono_for_Powerline:h11 fileformat=dos
     " To save, press ctrl-s.
     nmap <c-s> :w<CR>
     imap <c-s> <Esc>:w<CR>a
-    " Set the fileformat to Windows, for <CR><LF> line endings
-    setlocal fileformat=dos
 else
     if has("gui_macvim")
         " Because MacVim is mean about colorscheme
         set background=dark
         colorscheme earendel
-        setlocal lines=50 columns=180
+        set lines=48 columns=180
         " Set windows to be slightly see-through; MacVim-only
-        setlocal transparency=8
+        set transparency=8
         nmap <D-s> :w<CR>
         imap <D-s> <Esc>:w<CR>
     elseif has("gui_gtk2")
-        set guifont=Courier\ 10\ Pitch\ 10
-        set guifontwide=Courier\ 10\ Pitch\ 10 fileformat=unix
-        setlocal lines=40 columns=180
-        "setlocal guifont=Ubuntu
+        set lines=40 columns=180
+    endif
+    let s:uname = system("uname")
+    if s:uname == "Darwin\n"
+        set guifont=DejaVu_Sans_Mono_for_Powerline:h11 fileformat=unix
+        set guifontwide=DejaVu_Sans_Mono_for_Powerline:h11 fileformat=unix
+        "set guifont=Inconsolata_for_Powerline:h15 fileformat=unix
+        "set guifontwide=Inconsolata_for_Powerline:h15 fileformat=unix
     endif
 endif
 " }}}
@@ -53,7 +55,7 @@ function GuiTabLabel()
     endif
     return label
 endfunction
-" }}}
 " See ':help setting-guitablabel'
 set guitablabel=%{GuiTabLabel()}\ %t
+" }}}
 " vim: ft=vim

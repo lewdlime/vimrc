@@ -21,6 +21,8 @@ call vundle#rc()
 Plugin 'gmarik/Vundle.vim'
 " Required
 " Bundles {{{
+" Powerline (requires build first)
+Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 " Snippets
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
@@ -62,6 +64,7 @@ Plugin 'szw/vim-ctrlspace'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tomtom/quickfixsigns_vim'
 Plugin 'tomtom/tlib_vim'
+Plugin 'tpope/vim-pathogen'
 Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-cucumber'
 Plugin 'tpope/vim-dispatch'
@@ -171,15 +174,15 @@ autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
 autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
 " }}}
 " Settings {{{
-
 " 'spellcheck' is disabled by default
 " To enable again, use:
-" setlocal spell spelllang=en_us
-
+"setlocal spell spelllang=en_us
 " Load 'matchit.vim'
 runtime macros/matchit.vim
 " Set leader character to ','
 "let mapleader = ','
+" Let window redrawing take it's time
+set lazyredraw
 " Sets buffers to be hidden when abandoned, not unloaded.
 set hidden
 " Turn modeline on so files with a modeline comment open with assigned
@@ -194,7 +197,7 @@ set shiftwidth=4 tabstop=4 backspace=indent,eol,start expandtab smarttab
 " Set text and file encoding to Unicode, set line endings to UNIX
 set encoding=utf-8 fileencodings=utf-8 fileformat=unix
 if has('gui_running')
-    if has('mac')
+    if has('gui_macvim')
         " because MacVim is mean
         set background=dark
         colorscheme earendel
@@ -248,6 +251,8 @@ set statusline+=%-14(%l,%c%V%)
 " file position
 set statusline+=%<%P
 " }}}
+" Set foldmethod to marker by default
+set foldmethod=marker
 " Show position of cursor & show commands that have been entered
 set ruler showcmd
 " Incremental search & ignore case during searches
