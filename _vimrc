@@ -182,7 +182,6 @@ autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
 " Set settings for powerline
 set t_Co=256
 set fillchars+=stl:\ ,stlnc:\
-set term=xterm-256color
 set termencoding=utf-8
 " 'spellcheck' is disabled by default
 " To enable again, use:
@@ -190,7 +189,7 @@ set termencoding=utf-8
 " Load 'matchit.vim'
 runtime macros/matchit.vim
 " Set leader character to ','
-"let mapleader=','
+let mapleader=','
 " Let window redrawing take it's time
 set lazyredraw
 " Sets buffers to be hidden when abandoned, not unloaded.
@@ -221,7 +220,9 @@ if has('gui_running')
     colorscheme earendel
     let do_syntax_sel_menu=1
     runtime! synmenu.vim
-    aunmenu &Syntax.&Show\ filetypes\ in\ menu
+    if has('gui_win32')
+        aunmenu &Syntax.&Show\ filetypes\ in\ menu
+    endif
 else
     " Sets window to have a title
     set title
@@ -337,7 +338,7 @@ function! HighlightRepeats() range
 endfunction
 command! -range=% HighlightRepeats <line1>,<line2>call HighlightRepeats()
 " diff function {{{
-func MyDiff()
+function! MyDiff()
   let opt='-a --binary '
   if &diffopt =~ 'icase' | let opt=opt . '-i ' | endif
   if &diffopt =~ 'iwhite' | let opt=opt . '-b ' | endif
@@ -425,13 +426,12 @@ nmap <silent><Leader>tn <Esc>:Pytest next<CR>
 nmap <silent><Leader>tp <Esc>:Pytest previous<CR>
 nmap <silent><Leader>te <Esc>:Pytest error<CR>
 " Python-based mappings (:O \o)
-command O call Open()
+command! O call Open()
 map <Leader>o :call Open()<CR>
 " }}}
 " Plugin Options {{{
 " Vim Airline {{{
-AirlineToggle
-AirlineTheme hybrid
+AirlineTheme kalisi
 let g:airline_powerline_fonts=1
 let g:airline_detect_modified=1
 let g:airline_detect_paste=1
@@ -459,7 +459,7 @@ let g:airline#extensions#branch#format=1
 let g:airline#extensions#syntastic#enabled=1
 let g:airline#extensions#ctrlp#color_template='insert'
 let g:airline#extensions#ctrlp#show_adjacent_modes=1
-let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#enabled=0
 let g:airline#extensions#tabline#show_buffers=1
 let g:airline#extensions#tabline#show_tab_nr=1
 let g:airline#extensions#tabline#formatter='default'
@@ -469,7 +469,6 @@ let g:airline#extensions#tmuxline#enabled=1
 let airline#extensions#tmuxline#color_template='normal'
 let g:airline#extensions#promptline#enabled=1
 let airline#extensions#promptline#color_template='normal'
-airline#extensions#promptline#snapshot_file="~/.shell_prompt.sh"
 let g:airline#extensions#ctrlspace#enabled=1
 " }}}
 " Ultisnips
