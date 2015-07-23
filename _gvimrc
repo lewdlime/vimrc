@@ -13,6 +13,9 @@ if has("gui_win32")
     imap <c-s> <Esc>:w<CR>a
 else
     if has("gui_macvim")
+        " Set Powerline font for symbols in Airline
+        set guifont=DejaVu_Sans_Mono_for_Powerline:h11
+        set guifontwide=DejaVu_Sans_Mono_for_Powerline:h11
         " Because MacVim is mean
         set background=dark
         colorscheme earendel
@@ -23,15 +26,12 @@ else
         imap <D-s> <Esc>:w<CR>
         set macmeta
     elseif has("gui_gtk2")
+        set guifont=Source\ Code\ Pro\ for\ Powerline
+        set guifontwide=Source\ Code\ Pro\ for\ Powerline
         set lines=40 columns=180
     endif
-    let s:uname = system("uname")
-    if s:uname == "Darwin\n"
-        set guifont=DejaVu_Sans_Mono_for_Powerline:h11
-        set guifontwide=DejaVu_Sans_Mono_for_Powerline:h11
-        "set guifont=Inconsolata_for_Powerline:h15
-        "set guifontwide=Inconsolata_for_Powerline:h15
-    endif
+    "set guifont=Inconsolata_for_Powerline:h15
+    "set guifontwide=Inconsolata_for_Powerline:h15
 endif
 " }}}
 " GuiTabLabel {{{
