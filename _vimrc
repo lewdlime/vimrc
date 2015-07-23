@@ -182,11 +182,15 @@ autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
 autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
 autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
 " }}}
-" Settings {{{
-" Set settings for powerline
+" Vim Settings {{{
+" Set terminal colors to 256 colors
 set t_Co=256
+" Set statusline characters
 set fillchars+=stl:\ ,stlnc:\
+" Set embedded terminal as UTF-8, regardless of terminal
 set termencoding=utf-8
+" Set sessions to save open tabs and globals
+set sessionoptions+=tabpages,globals
 " 'spellcheck' is disabled by default
 " To enable again, use:
 "setlocal spell spelllang=en_us
@@ -514,6 +518,8 @@ let g:vimclojure#ParenRainbow=1
 let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
 " Syntastic
 let g:syntastic_enable_signs=1
+" Taboo.vim
+let g:taboo_tab_format=" %n %f%m "
 " Rainbow Parentheses {{{
 let g:rbpt_colorpairs=[
     \ ['brown',       'RoyalBlue3'],
@@ -541,4 +547,4 @@ let g:rbpt_max=16
 filetype on
 filetype plugin indent on
 " }}}
-" vim: ft=vim
+" vim: ft=vim fdm=marker
