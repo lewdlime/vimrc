@@ -21,8 +21,9 @@ call vundle#rc()
 Plugin 'gmarik/Vundle.vim'
 " Required
 " Bundles {{{
-" Powerline (requires build first)
+" Powerline (note: we only need the symbols.)
 Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'powerline/fonts'
 " Snippets
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
@@ -38,6 +39,9 @@ Plugin 'alfredodeza/pytest.vim'
 Plugin 'benmills/vimux'
 Plugin 'bling/vim-airline'
 Plugin 'bling/vim-bufferline'
+Plugin 'chrisbra/csv.vim'
+Plugin 'edkolev/promptline.vim'
+Plugin 'edkolev/tmuxline.vim'
 Plugin 'ervandew/supertab'
 Plugin 'fholgado/minibufexpl.vim'
 Plugin 'fs111/pydoc.vim'
@@ -64,13 +68,13 @@ Plugin 'szw/vim-ctrlspace'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tomtom/quickfixsigns_vim'
 Plugin 'tomtom/tlib_vim'
-Plugin 'tpope/vim-pathogen'
 Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-cucumber'
 Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-flagship'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-git'
+Plugin 'tpope/vim-pathogen'
 Plugin 'tpope/vim-surround'
 Plugin 'triglav/vim-visual-increment'
 Plugin 'vim-pandoc/vim-pandoc'
@@ -83,6 +87,7 @@ Plugin 'wincent/ferret'
 Plugin 'wincent/terminus'
 "Plugin 'laughingman182/abc-vim'
 " Themes
+Plugin 'altercation/vim-colors-solarized'
 Plugin 'chriskempson/vim-tomorrow-theme'
 " vim-scripts Bundles
 Plugin 'Csound-compiler-plugin'
@@ -174,13 +179,18 @@ autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
 autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
 " }}}
 " Settings {{{
+" Set settings for powerline
+set t_Co=256
+set fillchars+=stl:\ ,stlnc:\
+set term=xterm-256color
+set termencoding=utf-8
 " 'spellcheck' is disabled by default
 " To enable again, use:
 "setlocal spell spelllang=en_us
 " Load 'matchit.vim'
 runtime macros/matchit.vim
 " Set leader character to ','
-"let mapleader = ','
+"let mapleader=','
 " Let window redrawing take it's time
 set lazyredraw
 " Sets buffers to be hidden when abandoned, not unloaded.
@@ -196,6 +206,7 @@ set omnifunc=syntaxcomplete#Complete completeopt=menuone,longest,preview
 set shiftwidth=4 tabstop=4 backspace=indent,eol,start expandtab smarttab
 " Set text and file encoding to Unicode, set line endings to UNIX
 set encoding=utf-8 fileencodings=utf-8 fileformat=unix
+" GUI settings {{{
 if has('gui_running')
     if has('gui_macvim')
         " because MacVim is mean
@@ -208,7 +219,7 @@ if has('gui_running')
     " Color scheme for music editing
     set background=dark
     colorscheme earendel
-    let do_syntax_sel_menu = 1
+    let do_syntax_sel_menu=1
     runtime! synmenu.vim
     aunmenu &Syntax.&Show\ filetypes\ in\ menu
 else
@@ -222,8 +233,9 @@ else
     colorscheme earendel
     aunmenu &Syntax.&Show\ filetypes\ in\ menu
 endif
-" Status line {{{
+" }}}
 set laststatus=2
+" Status line {{{
 " clear last format of status line
 set statusline=""
 " buffer number
@@ -287,16 +299,16 @@ highlight Pmenu ctermbg=238 gui=bold
 " Functions {{{
 " SmartTab completion
 function! SmartTabComplete()
-  let line = getline('.')                         " current line
-  let substr = strpart(line, -1, col('.')+1)      " from the start of the current
+  let line=getline('.')                         " current line
+  let substr=strpart(line, -1, col('.')+1)      " from the start of the current
                                                   " line to one character right
                                                   " of the cursor
-  let substr = matchstr(substr, "[^ \t]*$")       " word till cursor
+  let substr=matchstr(substr, "[^ \t]*$")       " word till cursor
   if(strlen(substr)==0)                           " nothing to match on empty string
     return "\<tab>"
   endif
-  let has_period = match(substr, '\.') != -1      " position of period, if any
-  let has_slash = match(substr, '\/') != -1       " position of slash, if any
+  let has_period=match(substr, '\.') != -1      " position of period, if any
+  let has_slash=match(substr, '\/') != -1       " position of slash, if any
   if (!has_period && !has_slash)
     return "\<C-X>\<C-P>"                         " existing text matching
   elseif(has_slash)
@@ -307,14 +319,14 @@ function! SmartTabComplete()
 endfunction
 " HighlightRepeats
 function! HighlightRepeats() range
-  let lineCounts = {}
-  let lineNum = a:firstline
+  let lineCounts={}
+  let lineNum=a:firstline
   while lineNum <= a:lastline
-    let lineText = getline(lineNum)
+    let lineText=getline(lineNum)
     if lineText != ""
-      let lineCounts[lineText] = (has_key(lineCounts, lineText) ? lineCounts[lineText] : 0) + 1
+      let lineCounts[lineText]=(has_key(lineCounts, lineText) ? lineCounts[lineText] : 0) + 1
     endif
-    let lineNum = lineNum + 1
+    let lineNum=lineNum + 1
   endwhile
   exe 'syn clear Repeat'
   for lineText in keys(lineCounts)
@@ -326,31 +338,41 @@ endfunction
 command! -range=% HighlightRepeats <line1>,<line2>call HighlightRepeats()
 " diff function {{{
 func MyDiff()
-  let opt = '-a --binary '
-  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-  let arg1 = v:fname_in
-  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-  let arg2 = v:fname_new
-  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-  let arg3 = v:fname_out
-  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-  let eq = ''
+  let opt='-a --binary '
+  if &diffopt =~ 'icase' | let opt=opt . '-i ' | endif
+  if &diffopt =~ 'iwhite' | let opt=opt . '-b ' | endif
+  let arg1=v:fname_in
+  if arg1 =~ ' ' | let arg1='"' . arg1 . '"' | endif
+  let arg2=v:fname_new
+  if arg2 =~ ' ' | let arg2='"' . arg2 . '"' | endif
+  let arg3=v:fname_out
+  if arg3 =~ ' ' | let arg3='"' . arg3 . '"' | endif
+  let eq=''
   if $VIMRUNTIME =~ ' '
     if &sh =~ '\<cmd'
-      let cmd = '""' . $VIMRUNTIME . '\diff"'
-      let eq = '"'
+      let cmd='""' . $VIMRUNTIME . '\diff"'
+      let eq='"'
     else
-      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+      let cmd=substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
     endif
   else
-    let cmd = $VIMRUNTIME . '\diff'
+    let cmd=$VIMRUNTIME . '\diff'
   endif
   silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
 endfunc
 " }}}
 " }}}
 " Mappings {{{
+" Vim Airline
+nmap <leader>1 <Plug>AirlineSelectTab1
+nmap <leader>2 <Plug>AirlineSelectTab2
+nmap <leader>3 <Plug>AirlineSelectTab3
+nmap <leader>4 <Plug>AirlineSelectTab4
+nmap <leader>5 <Plug>AirlineSelectTab5
+nmap <leader>6 <Plug>AirlineSelectTab6
+nmap <leader>7 <Plug>AirlineSelectTab7
+nmap <leader>8 <Plug>AirlineSelectTab8
+nmap <leader>9 <Plug>AirlineSelectTab9
 " To save, press ctrl-s.
 nmap <c-s> :w<CR>
 imap <c-s> <Esc>:w<CR>a
@@ -407,6 +429,49 @@ command O call Open()
 map <Leader>o :call Open()<CR>
 " }}}
 " Plugin Options {{{
+" Vim Airline {{{
+AirlineToggle
+AirlineTheme hybrid
+let g:airline_powerline_fonts=1
+let g:airline_detect_modified=1
+let g:airline_detect_paste=1
+let g:airline_detect_crypt=1
+let g:airline_detect_iminsert=1
+let g:airline_inactive_collapse=1
+if !exists('g:airline_symbols')
+    let g:airline_symbols={}
+endif
+let g:airline_left_sep=''
+let g:airline_left_alt_sep=''
+let g:airline_right_sep=''
+let g:airline_right_alt_sep=''
+let g:airline_symbols.branch=''
+let g:airline_symbols.readonly=''
+let g:airline_symbols.linenr=''
+let g:airline#extensions#quickfix#quickfix_text='Quickfix'
+let g:airline#extensions#quickfix#location_text='Location'
+let g:airline#extensions#bufferline#enabled=1
+let g:airline#extensions#bufferline#overwrite_variables=1
+let g:airline#extensions#branch#enabled=1
+let g:airline#extensions#branch#empty_message=''
+let g:airline#extensions#branch#displayed_head_limit=10
+let g:airline#extensions#branch#format=1
+let g:airline#extensions#syntastic#enabled=1
+let g:airline#extensions#ctrlp#color_template='insert'
+let g:airline#extensions#ctrlp#show_adjacent_modes=1
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#show_buffers=1
+let g:airline#extensions#tabline#show_tab_nr=1
+let g:airline#extensions#tabline#formatter='default'
+let g:airline#extensions#tabline#show_close_button=1
+let g:airline#extensions#tabline#close_symbol='X'
+let g:airline#extensions#tmuxline#enabled=1
+let airline#extensions#tmuxline#color_template='normal'
+let g:airline#extensions#promptline#enabled=1
+let airline#extensions#promptline#color_template='normal'
+airline#extensions#promptline#snapshot_file="~/.shell_prompt.sh"
+let g:airline#extensions#ctrlspace#enabled=1
+" }}}
 " Ultisnips
 " let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
@@ -414,33 +479,34 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 " Pyflakes
-let g:pyflakes_use_quickfix = 0
+let g:pyflakes_use_quickfix=0
 " PEP8
 let g:pep8_map='<leader>8'
-" SuperTab
-"let g:SuperTabDefaultCompletionType = '<C-P>'
-"let g:SuperTabDefaultCompletionType = '<C-X><C-V>'
-"let g:SuperTabDefaultCompletionType = '<C-X><C-O>'
-let g:SuperTabDefaultCompletionType = 'context'
-let g:SuperTabContextDefaultCompletionType = 'context'
-let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
-let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
-let g:SuperTabContextDiscoverDiscovery = ["&completefunc:<C-X><C-U>", "&omnifunc:<c-x><c-o>"]
-let g:SuperTabRetainCompletionDuration = 'insert'
-let g:SuperTabNoCompleteAfter = ['^', '\s', '\t']
-let g:SuperTabCompleteCase = 'ignorcase'
+" SuperTab {{{
+"let g:SuperTabDefaultCompletionType='<C-P>'
+"let g:SuperTabDefaultCompletionType='<C-X><C-V>'
+"let g:SuperTabDefaultCompletionType='<C-X><C-O>'
+let g:SuperTabDefaultCompletionType='context'
+let g:SuperTabContextDefaultCompletionType='context'
+let g:SuperTabCompletionContexts=['s:ContextText', 's:ContextDiscover']
+let g:SuperTabContextTextOmniPrecedence=['&omnifunc', '&completefunc']
+let g:SuperTabContextDiscoverDiscovery=["&completefunc:<C-X><C-U>", "&omnifunc:<c-x><c-o>"]
+let g:SuperTabRetainCompletionDuration='insert'
+let g:SuperTabNoCompleteAfter=['^', '\s', '\t']
+let g:SuperTabCompleteCase='ignorcase'
+" }}}
 " XML.vim: Fold XML tags, enable XML plugin on editing HTML,
-"          set XML tag syntax prefixes,
+"     set XML tag syntax prefixes,
 let g:xml_use_html=1
 let g:xml_syntax_folding=1
 " VimClojure
-let g:vimclojure#ParenRainbow = 1
+let g:vimclojure#ParenRainbow=1
 " NERDTree
 let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
 " Syntastic
 let g:syntastic_enable_signs=1
-" Rainbow Parentheses
-let g:rbpt_colorpairs = [
+" Rainbow Parentheses {{{
+let g:rbpt_colorpairs=[
     \ ['brown',       'RoyalBlue3'],
     \ ['Darkblue',    'SeaGreen3'],
     \ ['darkgray',    'DarkOrchid3'],
@@ -457,7 +523,8 @@ let g:rbpt_colorpairs = [
     \ ['darkcyan',    'SeaGreen3'],
     \ ['darkred',     'DarkOrchid3'],
     \ ['red',         'firebrick3'], ]
-let g:rbpt_max = 16
+let g:rbpt_max=16
+" }}}
 " }}}
 " Filetype {{{
 " Turn on the filetype features, filetype plugins, and filetype indent now that

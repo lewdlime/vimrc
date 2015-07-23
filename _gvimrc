@@ -26,10 +26,10 @@ else
     endif
     let s:uname = system("uname")
     if s:uname == "Darwin\n"
-        set guifont=DejaVu_Sans_Mono_for_Powerline:h11 fileformat=unix
-        set guifontwide=DejaVu_Sans_Mono_for_Powerline:h11 fileformat=unix
-        "set guifont=Inconsolata_for_Powerline:h15 fileformat=unix
-        "set guifontwide=Inconsolata_for_Powerline:h15 fileformat=unix
+        set guifont=DejaVu_Sans_Mono_for_Powerline:h11
+        set guifontwide=DejaVu_Sans_Mono_for_Powerline:h11
+        "set guifont=Inconsolata_for_Powerline:h15
+        "set guifontwide=Inconsolata_for_Powerline:h15
     endif
 endif
 " }}}
