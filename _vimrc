@@ -182,12 +182,13 @@ runtime macros/matchit.vim
 "let mapleader = ','
 " Sets buffers to be hidden when abandoned, not unloaded.
 set hidden
+" Turn modeline on so files with a modeline comment open with assigned
+" settings
+set modeline
 " Turn syntax on. 'Highlight colors are overruled but links are kept'
 syntax on
 " Use syntax-based omnicomplete, set omnicomplete options
 set omnifunc=syntaxcomplete#Complete completeopt=menuone,longest,preview
-" Set folding options
-set foldmethod=indent foldlevel=99 foldcolumn=3
 " Tabs converted to 4 spaces
 set shiftwidth=4 tabstop=4 backspace=indent,eol,start expandtab smarttab
 " Set text and file encoding to Unicode, set line endings to UNIX
@@ -214,10 +215,11 @@ else
     "colorscheme nuvola
     " Color scheme for music editing
     set background=dark
-    colorscheme brookstream
+    "colorscheme brookstream
+    colorscheme earendel
     aunmenu &Syntax.&Show\ filetypes\ in\ menu
 endif
-" Status line
+" Status line {{{
 set laststatus=2
 " clear last format of status line
 set statusline=""
@@ -245,6 +247,7 @@ set statusline+=0x%-8B
 set statusline+=%-14(%l,%c%V%)
 " file position
 set statusline+=%<%P
+" }}}
 " Show position of cursor & show commands that have been entered
 set ruler showcmd
 " Incremental search & ignore case during searches
@@ -315,7 +318,6 @@ function! HighlightRepeats() range
     endif
   endfor
 endfunction
-
 command! -range=% HighlightRepeats <line1>,<line2>call HighlightRepeats()
 " diff function {{{
 func MyDiff()
