@@ -3,12 +3,12 @@
 " Set the toolbar & scrollbar settings
 set guioptions+=bT
 " OS-dependent options {{{
-if has("gui_win32") || has("gui_win64")
+if has("win32") || has("win64")
     setlocal lines=200 columns=200
-    " Set GUI font to Droid Sans Mono Dotted for Powerline
+    " Set GUI font to DejaVu Sans Mono for Powerline
     " so Windows can actually use a functional font
-    set guifont=Droid_Sans_Mono_for_Powerline:h10:cANSI
-    set guifontwide=Droid_Sans_Mono_for_Powerline:h10:cANSI
+    set guifont=DejaVu_Sans_Mono_for_Powerline:h10:cANSI
+    set guifontwide=DejaVu_Sans_Mono_for_Powerline:h10:cANSI
     " To save, press ctrl-s.
     nmap <c-s> :w<CR>
     imap <c-s> <Esc>:w<CR>a
@@ -60,4 +60,4 @@ endfunction
 " See ':help setting-guitablabel'
 set guitablabel=%{GuiTabLabel()}\ %t
 " }}}
-" vim: ft=vim
+" vim: ft=vim fdm=marker
