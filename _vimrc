@@ -9,9 +9,7 @@ set nocompatible nobackup
 " Filetype MUST be off for vundle!
 filetype off
 " Load pathogen
-" This helps correct the duplicate help tags.
 call pathogen#infect()
-call pathogen#helptags()
 " Add vundle to the runtimepath
 if has("win32" || "win64")
     set runtimepath+=$VIM\vimfiles\bundle\Vundle.vim\
@@ -98,6 +96,8 @@ Plugin 'Csound-compiler-plugin'
 " non-github repos
 
 " }}}
+" This helps correct the duplicate help tags.
+call pathogen#helptags()
 " }}}
 " Python Segments {{{
 " Assumes Python >= 2.6
@@ -442,7 +442,7 @@ map <Leader>o :call Open()<CR>
 " }}}
 " Plugin Options {{{
 " Vim Airline {{{
-AirlineTheme kalisi
+AirlineTheme hybrid 
 let g:airline_powerline_fonts=1
 let g:airline_detect_modified=1
 let g:airline_detect_paste=1
