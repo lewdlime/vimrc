@@ -473,7 +473,9 @@ let g:airline#extensions#ctrlp#show_adjacent_modes=1
 " NOTE: only change tabline to enabled if on Linux or Windows, where the
 " tabline is ugly enought to want it to be controlled by airline. On MacVim,
 " keep the tabline the default.
-let g:airline#extensions#tabline#enabled=0
+if has('win32') || has('win64') || has('gui_gtk2') || has('x11')
+  let g:airline#extensions#tabline#enabled=1
+endif
 let g:airline#extensions#tabline#show_buffers=1
 let g:airline#extensions#tabline#show_tab_nr=1
 let g:airline#extensions#tabline#formatter='default'
