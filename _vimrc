@@ -11,12 +11,13 @@ filetype off
 " Load pathogen
 call pathogen#infect()
 " Add vundle to the runtimepath
-if has("win32" || "win64")
+if has('win32' || 'win64')
     set runtimepath+=$VIM\vimfiles\bundle\Vundle.vim\
+    call vundle#begin('$VIM/vimfiles/bundle')
 else
     set runtimepath+=~/.vim/bundle/Vundle.vim/
+    call vundle#begin()
 endif
-call vundle#rc()
 Plugin 'gmarik/Vundle.vim'
 " Required
 " Bundles {{{
@@ -93,8 +94,19 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'chriskempson/vim-tomorrow-theme'
 " vim-scripts Bundles
 Plugin 'Csound-compiler-plugin'
+Plugin 'utl.vim'
+Plugin 'Txtfmt-The-Vim-Highlighter'
+Plugin 'taglist.vim'
+Plugin 'a.vim'
+Plugin 'AutoComplPop'
+Plugin 'AfterColors.vim'
+Plugin 'Align.vim'
+Plugin 'AnsiEsc.vim'
+Plugin 'asciitable.vim'
+Plugin 'changeColorScheme.vim'
 " non-github repos
 
+call vundle#end()
 " }}}
 " This helps correct the duplicate help tags.
 call pathogen#helptags()
