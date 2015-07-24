@@ -10,6 +10,7 @@ set nocompatible nobackup
 filetype off
 " Load pathogen
 call pathogen#infect()
+call vundle#rc()
 " Add vundle to the runtimepath
 if has('win32' || 'win64')
     set runtimepath+=$VIM\vimfiles\bundle\Vundle.vim\
