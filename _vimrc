@@ -19,7 +19,6 @@ else
     set runtimepath+=~/.vim/bundle/Vundle.vim/
     call vundle#begin()
 endif
-
 Plugin 'gmarik/Vundle.vim'
 " Required
 " Bundles {{{
@@ -95,17 +94,17 @@ Plugin 'wincent/terminus'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'chriskempson/vim-tomorrow-theme'
 " vim-scripts Bundles
-Plugin 'Csound-compiler-plugin'
-Plugin 'utl.vim'
-Plugin 'Txtfmt-The-Vim-Highlighter'
-Plugin 'taglist.vim'
-Plugin 'a.vim'
-Plugin 'AutoComplPop'
 Plugin 'AfterColors.vim'
 Plugin 'Align.vim'
 Plugin 'AnsiEsc.vim'
+Plugin 'AutoComplPop'
+Plugin 'Csound-compiler-plugin'
+Plugin 'Txtfmt-The-Vim-Highlighter'
+Plugin 'a.vim'
 Plugin 'asciitable.vim'
 Plugin 'changeColorScheme.vim'
+Plugin 'taglist.vim'
+Plugin 'utl.vim'
 " non-github repos
 
 call vundle#end()
@@ -456,7 +455,7 @@ map <Leader>o :call Open()<CR>
 " }}}
 " Plugin Options {{{
 " Vim Airline {{{
-AirlineTheme hybrid 
+let g:airline_theme='kalisi'
 let g:airline_powerline_fonts=1
 let g:airline_detect_modified=1
 let g:airline_detect_paste=1
