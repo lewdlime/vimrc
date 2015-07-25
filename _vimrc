@@ -19,6 +19,7 @@ else
     set runtimepath+=~/.vim/bundle/Vundle.vim/
     call vundle#begin()
 endif
+
 Plugin 'gmarik/Vundle.vim'
 " Required
 " Bundles {{{
