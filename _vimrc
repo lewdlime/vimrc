@@ -30,7 +30,7 @@ Plugin 'powerline/fonts'
 " Snippets
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-" Original Bundles
+" Original Bundles {{{
 if has("mac")
     Plugin 'rizzatti/dash.vim'
 endif
@@ -90,23 +90,46 @@ Plugin 'wincent/Command-T'
 Plugin 'wincent/ferret'
 Plugin 'wincent/terminus'
 "Plugin 'laughingman182/abc-vim'
-" Themes
+" }}}
+" Themes {{{
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'chriskempson/vim-tomorrow-theme'
-" vim-scripts Bundles
+" }}}
+" vim-scripts Bundles {{{
 Plugin 'AfterColors.vim'
 Plugin 'Align.vim'
 Plugin 'AnsiEsc.vim'
 Plugin 'AutoComplPop'
+Plugin 'Colour-Sampler-Pack'
+Plugin 'Conque-Shell'
 Plugin 'Csound-compiler-plugin'
+Plugin 'DirDiff.vim'
+Plugin 'DrawIt'
+Plugin 'Txtfmt-The-Vim-Highlighter'
 Plugin 'Txtfmt-The-Vim-Highlighter'
 Plugin 'a.vim'
 Plugin 'asciitable.vim'
+Plugin 'c.vim'
+Plugin 'cecutil'
+Plugin 'changeColorScheme'
 Plugin 'changeColorScheme.vim'
+Plugin 'codepad'
+Plugin 'cppcomplete'
+Plugin 'dbext.vim'
+Plugin 'engspchk'
+Plugin 'gist.vim'
+Plugin 'matchit.zip'
+Plugin 'project.vim'
+"Plugin 'supertab'
+Plugin 'taglist.vim'
 Plugin 'taglist.vim'
 Plugin 'utl.vim'
-" non-github repos
+Plugin 'utl.vim'
+Plugin 'vim_faq'
+" }}}
+" Non-Github Repos {{{
 
+" }}}
 call vundle#end()
 " }}}
 " This helps correct the duplicate help tags.
