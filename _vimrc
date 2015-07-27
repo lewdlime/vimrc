@@ -97,7 +97,6 @@ Plugin 'chriskempson/vim-tomorrow-theme'
 " }}}
 " vim-scripts Bundles {{{
 Plugin 'AfterColors.vim'
-Plugin 'Align.vim'
 Plugin 'AnsiEsc.vim'
 Plugin 'AutoComplPop'
 Plugin 'Colour-Sampler-Pack'
@@ -106,12 +105,9 @@ Plugin 'Csound-compiler-plugin'
 Plugin 'DirDiff.vim'
 Plugin 'DrawIt'
 Plugin 'Txtfmt-The-Vim-Highlighter'
-Plugin 'Txtfmt-The-Vim-Highlighter'
 Plugin 'a.vim'
-Plugin 'asciitable.vim'
 Plugin 'c.vim'
 Plugin 'cecutil'
-Plugin 'changeColorScheme'
 Plugin 'changeColorScheme.vim'
 Plugin 'codepad'
 Plugin 'cppcomplete'
@@ -119,11 +115,7 @@ Plugin 'dbext.vim'
 Plugin 'engspchk'
 Plugin 'gist.vim'
 Plugin 'matchit.zip'
-Plugin 'project.vim'
-"Plugin 'supertab'
 Plugin 'taglist.vim'
-Plugin 'taglist.vim'
-Plugin 'utl.vim'
 Plugin 'utl.vim'
 Plugin 'vim_faq'
 " }}}
@@ -510,7 +502,7 @@ let g:airline#extensions#ctrlp#show_adjacent_modes=1
 " tabline is ugly enought to want it to be controlled by airline. On MacVim,
 " keep the tabline the default.
 if has('win32') || has('win64') || has('gui_gtk2') || has('x11')
-  let g:airline#extensions#tabline#enabled=1
+  let g:airline#extensions#tabline#enabled=0
 endif
 let g:airline#extensions#tabline#show_buffers=1
 let g:airline#extensions#tabline#show_tab_nr=1
