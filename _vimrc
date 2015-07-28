@@ -30,7 +30,7 @@ Plugin 'powerline/fonts'
 " Snippets
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-" Original Bundles
+" Original Bundles {{{
 if has("mac")
     Plugin 'rizzatti/dash.vim'
 endif
@@ -90,23 +90,38 @@ Plugin 'wincent/Command-T'
 Plugin 'wincent/ferret'
 Plugin 'wincent/terminus'
 "Plugin 'laughingman182/abc-vim'
-" Themes
+" }}}
+" Themes {{{
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'chriskempson/vim-tomorrow-theme'
-" vim-scripts Bundles
+" }}}
+" vim-scripts Bundles {{{
 Plugin 'AfterColors.vim'
-Plugin 'Align.vim'
 Plugin 'AnsiEsc.vim'
 Plugin 'AutoComplPop'
+Plugin 'Colour-Sampler-Pack'
+Plugin 'Conque-Shell'
 Plugin 'Csound-compiler-plugin'
+Plugin 'DirDiff.vim'
+Plugin 'DrawIt'
 Plugin 'Txtfmt-The-Vim-Highlighter'
 Plugin 'a.vim'
-Plugin 'asciitable.vim'
+Plugin 'c.vim'
+Plugin 'cecutil'
 Plugin 'changeColorScheme.vim'
+Plugin 'codepad'
+Plugin 'cppcomplete'
+Plugin 'dbext.vim'
+Plugin 'engspchk'
+Plugin 'gist.vim'
+Plugin 'matchit.zip'
 Plugin 'taglist.vim'
 Plugin 'utl.vim'
-" non-github repos
+Plugin 'vim_faq'
+" }}}
+" Non-Github Repos {{{
 
+" }}}
 call vundle#end()
 " }}}
 " This helps correct the duplicate help tags.
@@ -244,9 +259,6 @@ if has('gui_running')
     colorscheme earendel
     let do_syntax_sel_menu=1
     runtime! synmenu.vim
-    if has('gui_win32')
-        aunmenu &Syntax.&Show\ filetypes\ in\ menu
-    endif
 else
     " Sets window to have a title
     set title
@@ -259,8 +271,9 @@ else
     aunmenu &Syntax.&Show\ filetypes\ in\ menu
 endif
 " }}}
-set laststatus=2
 " Status line {{{
+" Show extra info in status line
+set laststatus=2
 " clear last format of status line
 set statusline=""
 " buffer number
@@ -455,7 +468,7 @@ map <Leader>o :call Open()<CR>
 " }}}
 " Plugin Options {{{
 " Vim Airline {{{
-let g:airline_theme='kalisi'
+let g:airline_theme='light'
 let g:airline_powerline_fonts=1
 let g:airline_detect_modified=1
 let g:airline_detect_paste=1
@@ -487,7 +500,7 @@ let g:airline#extensions#ctrlp#show_adjacent_modes=1
 " tabline is ugly enought to want it to be controlled by airline. On MacVim,
 " keep the tabline the default.
 if has('win32') || has('win64') || has('gui_gtk2') || has('x11')
-  let g:airline#extensions#tabline#enabled=1
+  let g:airline#extensions#tabline#enabled=0
 endif
 let g:airline#extensions#tabline#show_buffers=1
 let g:airline#extensions#tabline#show_tab_nr=1
