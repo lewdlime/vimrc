@@ -13,12 +13,14 @@ call pathogen#infect()
 " Add vundle to the runtimepath
 if has('win32' || 'win64')
     set runtimepath+=$VIM\vimfiles\bundle\Vundle.vim\
-    call vundle#begin('$VIM/vimfiles/bundle/Vundle.vim')
+    call vundle#begin('$VIM/vimfiles/bundle')
 else
     set runtimepath+=~/.vim/bundle/Vundle.vim/
-    call vundle#begin('$HOME/.vim/bundle/Vundle.vim')
+    call vundle#begin('$HOME/.vim/bundle')
 endif
 Plugin 'gmarik/Vundle.vim'
+" Only use this fork for Windows.
+"Plugin 'laughingman182/Vundle.vim'
 " Required
 " Bundles {{{
 " Powerline
@@ -93,25 +95,22 @@ Plugin 'wincent/terminus'
 " Themes {{{
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'chriskempson/vim-tomorrow-theme'
-" }}}
-" vim-scripts Bundles {{{
-Plugin 'AfterColors.vim'
-Plugin 'AnsiEsc.vim'
-Plugin 'AutoComplPop'
 Plugin 'Colour-Sampler-Pack'
+" }}}
+" vim-scripts Plugins {{{
+" AutoComplPop updated manually from Bitbucket.
+"Plugin 'AutoComplPop'
+" changeColorScheme.vim updated manually from vim-scripts.
+"Plugin 'changeColorScheme.vim'
+Plugin 'AfterColors'
 Plugin 'Conque-Shell'
 Plugin 'Csound-compiler-plugin'
 Plugin 'DirDiff.vim'
 Plugin 'DrawIt'
 Plugin 'Txtfmt-The-Vim-Highlighter'
-Plugin 'a.vim'
 Plugin 'c.vim'
 Plugin 'cecutil'
-Plugin 'changeColorScheme.vim'
-Plugin 'codepad'
 Plugin 'cppcomplete'
-Plugin 'dbext.vim'
-Plugin 'engspchk'
 Plugin 'gist.vim'
 Plugin 'matchit.zip'
 Plugin 'taglist.vim'
