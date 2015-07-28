@@ -10,14 +10,13 @@ set nocompatible nobackup
 filetype off
 " Load pathogen
 call pathogen#infect()
-call vundle#rc()
 " Add vundle to the runtimepath
 if has('win32' || 'win64')
     set runtimepath+=$VIM\vimfiles\bundle\Vundle.vim\
-    call vundle#begin('$VIM/vimfiles/bundle')
+    call vundle#begin('$VIM/vimfiles/bundle/Vundle.vim')
 else
     set runtimepath+=~/.vim/bundle/Vundle.vim/
-    call vundle#begin()
+    call vundle#begin('$HOME/.vim/bundle/Vundle.vim')
 endif
 Plugin 'gmarik/Vundle.vim'
 " Required
@@ -468,7 +467,9 @@ map <Leader>o :call Open()<CR>
 " }}}
 " Plugin Options {{{
 " Vim Airline {{{
+" Airline theme
 let g:airline_theme='light'
+" Let there be neat symbols; Requires Powerline patched fonts
 let g:airline_powerline_fonts=1
 let g:airline_detect_modified=1
 let g:airline_detect_paste=1
@@ -496,9 +497,6 @@ let g:airline#extensions#branch#format=1
 let g:airline#extensions#syntastic#enabled=1
 let g:airline#extensions#ctrlp#color_template='insert'
 let g:airline#extensions#ctrlp#show_adjacent_modes=1
-" NOTE: only change tabline to enabled if on Linux or Windows, where the
-" tabline is ugly enought to want it to be controlled by airline. On MacVim,
-" keep the tabline the default.
 let g:airline#extensions#tabline#enabled=0
 let g:airline#extensions#tabline#show_buffers=1
 let g:airline#extensions#tabline#show_tab_nr=1
