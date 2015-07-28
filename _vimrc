@@ -102,7 +102,7 @@ Plugin 'Colour-Sampler-Pack'
 "Plugin 'AutoComplPop'
 " changeColorScheme.vim updated manually from vim-scripts.
 "Plugin 'changeColorScheme.vim'
-Plugin 'AfterColors'
+Plugin 'AfterColors.vim'
 Plugin 'Conque-Shell'
 Plugin 'Csound-compiler-plugin'
 Plugin 'DirDiff.vim'
@@ -252,7 +252,7 @@ if has('gui_running')
         imap <D-s> <Esc>:w<CR>
         set macmeta
     endif
-    runtime! plugin/google_python_style.vim
+    runtime! indent/google_python_style.vim
     set background=dark
     colorscheme earendel
     let do_syntax_sel_menu=1
