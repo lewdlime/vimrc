@@ -42,3 +42,11 @@ g:acp_completeoptPreview	acp.jax	/*g:acp_completeoptPreview*
 g:acp_enableAtStartup	acp.jax	/*g:acp_enableAtStartup*
 g:acp_ignorecaseOption	acp.jax	/*g:acp_ignorecaseOption*
 g:acp_mappingDriven	acp.jax	/*g:acp_mappingDriven*
+l9	l9.jax	/*l9*
+l9-about	l9.jax	/*l9-about*
+l9-author	l9.jax	/*l9-author*
+l9-contact	l9.jax	/*l9-contact*
+l9-installation	l9.jax	/*l9-installation*
+l9-introduction	l9.jax	/*l9-introduction*
+l9-usage	l9.jax	/*l9-usage*
+l9.txt	l9.jax	/*l9.txt*
