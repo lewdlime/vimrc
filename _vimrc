@@ -31,9 +31,10 @@ Plugin 'gmarik/Vundle.vim'
 " itself.
 Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'powerline/fonts'
-" Snippets
+" Snippets {{{
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+" }}}
 " Original Bundles {{{
 if has("mac")
     Plugin 'rizzatti/dash.vim'
@@ -46,6 +47,7 @@ Plugin 'alfredodeza/pytest.vim'
 Plugin 'benmills/vimux'
 Plugin 'bling/vim-airline'
 Plugin 'bling/vim-bufferline'
+Plugin 'chiphogg/vim-vtd'
 Plugin 'chrisbra/csv.vim'
 Plugin 'edkolev/promptline.vim'
 Plugin 'edkolev/tmuxline.vim'
@@ -54,7 +56,18 @@ Plugin 'fholgado/minibufexpl.vim'
 Plugin 'fs111/pydoc.vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'gcmt/taboo.vim'
+Plugin 'glts/vim-magnum'
+Plugin 'glts/vim-radical'
+" Don't add this one untill you're sure it won't mess with existing docs.
+"Plugin 'google/vimdoc'
 Plugin 'gmarik/ide-popup.vim'
+Plugin 'google/vim-codefmt'
+Plugin 'google/vim-coverage'
+" See also: https://github.com/google/vroom.git
+Plugin 'google/vim-ft-vroom'
+Plugin 'google/vim-glaive'
+Plugin 'google/vim-maktaba'
+Plugin 'google/vim-syncopate'
 Plugin 'kien/ctrlp.vim'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'klen/python-mode'
@@ -96,6 +109,7 @@ Plugin 'wincent/terminus'
 "Plugin 'laughingman182/abc-vim'
 " }}}
 " Themes {{{
+Plugin 'google/vim-colorscheme-primary'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'chriskempson/vim-tomorrow-theme'
 Plugin 'Colour-Sampler-Pack'
