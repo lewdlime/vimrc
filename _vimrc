@@ -5,20 +5,22 @@
 " This must be first, because it changes other options as a side effect.
 " Also, set for Vim to not back up file(s) before saving.
 set nocompatible nobackup
+" USE THE OLD REGEX ENGINE. I'm not using the new one till they add the old
+" features again.
+set re=1
 " Vundle Init {{{
 " Filetype MUST be off for vundle!
 filetype off
 " Load pathogen
 call pathogen#infect()
-call vundle#rc()
 " Add vundle to the runtimepath
 if has('win32' || 'win64')
     set runtimepath+=$VIM\vimfiles\bundle\Vundle.vim\
-    call vundle#begin('$VIM/vimfiles/bundle')
 else
     set runtimepath+=~/.vim/bundle/Vundle.vim/
-    call vundle#begin()
 endif
+call vundle#rc()
+call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 " Only use this fork for Windows.
 "Plugin 'laughingman182/Vundle.vim'
