@@ -558,6 +558,7 @@ let g:vimclojure#ParenRainbow=1
 let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
 " Syntastic
 let g:syntastic_enable_signs=1
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['java'] }
 " Taboo.vim
 let g:taboo_tab_format=" %n %f%m "
 " Rainbow Parentheses {{{
