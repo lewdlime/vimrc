@@ -26,11 +26,19 @@ Plugin 'gmarik/Vundle.vim'
 "Plugin 'laughingman182/Vundle.vim'
 " Required
 " Bundles {{{
-" Powerline
-" NOTE: This is only added for the fonts it pulls, do not use powerline
-" itself.
-Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
+" Powerline {{{
+" NOTE: Powerline itself is not completely needed. Use a sparce checkout of
+" only the Vim bindings & font symbols:
+" $ mkdir powerline-symbols
+" $ cd powerline-vim
+" $ git init; git remote add powerline https://github.com/powerline/powerline.git
+" $ git config --global core.sparsecheckout true
+" $ echo powerline/bindings/vim >> .git/info/sparse-checkout
+" $ echo font >> .git/info/sparse-checkout
+" $ git pull origin develop
+" 
 Plugin 'powerline/fonts'
+" }}}
 " Snippets {{{
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
@@ -89,6 +97,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'sjl/gundo.vim'
 Plugin 'sukima/xmledit'
 Plugin 'swaroopch/vim-markdown-preview'
+Plugin 'syngan/vim-vimlint'
 Plugin 'szw/vim-ctrlspace'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tomtom/quickfixsigns_vim'
@@ -296,7 +305,7 @@ endif
 " Show extra info in status line
 set laststatus=2
 " clear last format of status line
-set statusline=""
+set statusline=''
 " buffer number
 set statusline+=%-3.3n\
 " filename
@@ -364,16 +373,16 @@ function! SmartTabComplete()
                                                   " of the cursor
   let substr=matchstr(substr, "[^ \t]*$")       " word till cursor
   if(strlen(substr)==0)                           " nothing to match on empty string
-    return "\<tab>"
+    return '\<tab>'
   endif
   let has_period=match(substr, '\.') != -1      " position of period, if any
   let has_slash=match(substr, '\/') != -1       " position of slash, if any
   if (!has_period && !has_slash)
-    return "\<C-X>\<C-P>"                         " existing text matching
+    return '\<C-X>\<C-P>'                         " existing text matching
   elseif(has_slash)
-    return "\<C-X>\<C-F>"                         " file matching
+    return '\<C-X>\<C-F>'                         " file matching
   else
-    return "\<C-X>\<C-O>"                         " plugin matching
+    return '\<C-X>\<C-O>'                         " plugin matching
   endif
 endfunction
 " HighlightRepeats
@@ -382,7 +391,7 @@ function! HighlightRepeats() range
   let lineNum=a:firstline
   while lineNum <= a:lastline
     let lineText=getline(lineNum)
-    if lineText != ""
+    if lineText != ''
       let lineCounts[lineText]=(has_key(lineCounts, lineText) ? lineCounts[lineText] : 0) + 1
     endif
     let lineNum=lineNum + 1
@@ -432,6 +441,8 @@ nmap <leader>6 <Plug>AirlineSelectTab6
 nmap <leader>7 <Plug>AirlineSelectTab7
 nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
+" Sort word in a line with <F2>
+vnoremap <F2> d:execute 'normal i' . join(sort(split(getreg('"'))), ' ')<CR>
 " To save, press ctrl-s.
 nmap <c-s> :w<CR>
 imap <c-s> <Esc>:w<CR>a
@@ -532,11 +543,11 @@ let airline#extensions#promptline#color_template='normal'
 let g:airline#extensions#ctrlspace#enabled=1
 " }}}
 " Ultisnips
-" let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" let g:UltiSnipsExpandTrigger='<tab>'
+let g:UltiSnipsJumpForwardTrigger='<c-b>'
+let g:UltiSnipsJumpBackwardTrigger='<c-z>'
 " If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsEditSplit='vertical'
 " Pyflakes
 let g:pyflakes_use_quickfix=0
 " PEP8
@@ -566,7 +577,7 @@ let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
 let g:syntastic_enable_signs=1
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['java'] }
 " Taboo.vim
-let g:taboo_tab_format=" %n %f%m "
+let g:taboo_tab_format=' %n %f%m '
 " Rainbow Parentheses {{{
 let g:rbpt_colorpairs=[
     \ ['brown',       'RoyalBlue3'],
@@ -587,6 +598,7 @@ let g:rbpt_colorpairs=[
     \ ['red',         'firebrick3'], ]
 let g:rbpt_max=16
 " }}}
+let g:snippets_dir=''
 " }}}
 " Filetype {{{
 " Turn on the filetype features, filetype plugins, and filetype indent now that
