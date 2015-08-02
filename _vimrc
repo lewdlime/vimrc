@@ -5,8 +5,7 @@
 " This must be first, because it changes other options as a side effect.
 " Also, set for Vim to not back up file(s) before saving.
 set nocompatible nobackup
-" USE THE OLD REGEX ENGINE. I'm not using the new one till they add the old
-" features again.
+" USE THE OLD REGEX ENGINE
 set re=1
 " Vundle Init {{{
 " Filetype MUST be off for vundle!
@@ -21,74 +20,54 @@ else
 endif
 call vundle#rc()
 call vundle#begin()
+" Required
 Plugin 'gmarik/Vundle.vim'
 " Only use this fork for Windows.
 "Plugin 'laughingman182/Vundle.vim'
-" Required
 " Bundles {{{
-" Powerline {{{
-" NOTE: Powerline itself is not completely needed. Use a sparce checkout of
-" only the Vim bindings & font symbols:
-" $ mkdir powerline-symbols
-" $ cd powerline-vim
-" $ git init; git remote add powerline https://github.com/powerline/powerline.git
-" $ git config --global core.sparsecheckout true
-" $ echo powerline/bindings/vim >> .git/info/sparse-checkout
-" $ echo font >> .git/info/sparse-checkout
-" $ git pull origin develop
-" 
+" Powerline fonts are required for Powerline to be useful to Vim
 Plugin 'powerline/fonts'
-" }}}
 " Snippets {{{
 Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
+Plugin 'msanders/snipmate.vim'
 " }}}
 " Original Bundles {{{
 if has("mac")
     Plugin 'rizzatti/dash.vim'
 endif
+" Tablines {{{
+"Plugin 'itchyny/lightline.vim'
+Plugin 'bling/vim-airline'
+" }}}
 " Don't add this one untill you're sure it won't mess with existing docs.
 "Plugin 'google/vimdoc'
 " See also: https://github.com/google/vroom.git
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'Shougo/neosnippet.vim'
 Plugin 'Shougo/unite.vim'
-Plugin 'alfredodeza/pytest.vim'
 Plugin 'benmills/vimux'
-Plugin 'bling/vim-airline'
 Plugin 'bling/vim-bufferline'
 Plugin 'chiphogg/vim-vtd'
 Plugin 'chrisbra/csv.vim'
+Plugin 'easymotion/vim-easymotion'
 Plugin 'edkolev/promptline.vim'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'ervandew/supertab'
-Plugin 'fholgado/minibufexpl.vim'
-Plugin 'fs111/pydoc.vim'
-Plugin 'garbas/vim-snipmate'
 Plugin 'gcmt/taboo.vim'
-Plugin 'glts/vim-magnum'
-Plugin 'glts/vim-radical'
-Plugin 'gmarik/ide-popup.vim'
 Plugin 'google/vim-codefmt'
 Plugin 'google/vim-coverage'
 Plugin 'google/vim-ft-vroom'
 Plugin 'google/vim-glaive'
 Plugin 'google/vim-maktaba'
 Plugin 'google/vim-syncopate'
-Plugin 'guns/vim-clojure-static'
-Plugin 'juvenn/mustache.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'klen/python-mode'
-Plugin 'maksimr/vim-jsbeautify'
 Plugin 'mattn/emmet-vim'
 Plugin 'mattn/gist-vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'mitechie/pyflakes-pathogen'
-Plugin 'msanders/snipmate.vim'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'nvie/vim-flake8'
+Plugin 'othree/vim-autocomplpop'
 Plugin 'reinh/vim-makegreen'
 Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdcommenter'
@@ -101,7 +80,6 @@ Plugin 'syngan/vim-vimlint'
 Plugin 'szw/vim-ctrlspace'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tomtom/quickfixsigns_vim'
-Plugin 'tomtom/tlib_vim'
 Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-classpath'
 Plugin 'tpope/vim-dispatch'
@@ -118,21 +96,25 @@ Plugin 'vim-scripts/TaskList.vim'
 Plugin 'vim-scripts/pep8'
 Plugin 'weierophinney/vimwiki'
 Plugin 'wesleyche/Trinity'
+Plugin 'weynhamz/vim-plugin-minibufexpl'
 Plugin 'wincent/Command-T'
 Plugin 'wincent/ferret'
 Plugin 'wincent/terminus'
-"Plugin 'laughingman182/abc-vim'
+" 'Addons' {{{
+Plugin 'glts/vim-magnum'
+Plugin 'glts/vim-radical'
+" }}}
 " }}}
 " Themes {{{
-Plugin 'google/vim-colorscheme-primary'
+Plugin 'Colour-Sampler-Pack'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'chriskempson/vim-tomorrow-theme'
-Plugin 'Colour-Sampler-Pack'
+Plugin 'google/vim-colorscheme-primary'
+Plugin 'itchyny/landscape.vim'
 " }}}
 " vim-scripts Plugins {{{
-" AutoComplPop updated manually from Bitbucket.
 "Plugin 'AutoComplPop'
-" changeColorScheme.vim updated manually from vim-scripts.
+"Plugin 'L9'
 "Plugin 'changeColorScheme.vim'
 Plugin 'AfterColors.vim'
 Plugin 'Conque-Shell'
@@ -255,7 +237,7 @@ set sessionoptions+=tabpages,globals
 " Load 'matchit.vim'
 runtime macros/matchit.vim
 " Set leader character to ','
-let mapleader=','
+"let mapleader=','
 " Let window redrawing take it's time
 set lazyredraw
 " Sets buffers to be hidden when abandoned, not unloaded.
@@ -266,7 +248,7 @@ set modeline
 " Turn syntax on. 'Highlight colors are overruled but links are kept'
 syntax on
 " Use syntax-based omnicomplete, set omnicomplete options
-set omnifunc=syntaxcomplete#Complete completeopt=menuone,longest,preview
+set omnifunc=syntaxcomplete#Complete completeopt=menu,menuone,longest,preview
 " Tabs converted to 4 spaces
 set shiftwidth=4 tabstop=4 backspace=indent,eol,start expandtab smarttab
 " Set text and file encoding to Unicode, set line endings to UNIX
@@ -441,6 +423,10 @@ nmap <leader>6 <Plug>AirlineSelectTab6
 nmap <leader>7 <Plug>AirlineSelectTab7
 nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
+" ide-popup.vim
+inoremap <expr> <CR>  pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <C-n> pumvisible() ? '<C-n>' : '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+snoremap <expr> <C-p> pumvisible() ? '<C-n>' : '<C-p><C-r>=pumvisible() ? "\<lt>Up>" : ""<CR>'
 " Sort word in a line with <F2>
 vnoremap <F2> d:execute 'normal i' . join(sort(split(getreg('"'))), ' ')<CR>
 " To save, press ctrl-s.
@@ -606,4 +592,4 @@ let g:snippets_dir=''
 filetype on
 filetype plugin indent on
 " }}}
-" vim: ft=vim fdm=marker
+" vim: fdm=marker ft=vim 
