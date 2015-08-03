@@ -35,15 +35,12 @@ Plugin 'msanders/snipmate.vim'
 if has("mac")
     Plugin 'rizzatti/dash.vim'
 endif
-" Tablines {{{
-"Plugin 'itchyny/lightline.vim'
-Plugin 'bling/vim-airline'
-" }}}
-" Don't add this one untill you're sure it won't mess with existing docs.
-"Plugin 'google/vimdoc'
 " See also: https://github.com/google/vroom.git
 Plugin 'Shougo/unite.vim'
+Plugin 'Shougo/vimfiler.vim'
+Plugin 'Shougo/vimshell.vim'
 Plugin 'benmills/vimux'
+Plugin 'bling/vim-airline'
 Plugin 'bling/vim-bufferline'
 Plugin 'chiphogg/vim-vtd'
 Plugin 'chrisbra/csv.vim'
@@ -496,7 +493,7 @@ let g:airline_detect_crypt=1
 let g:airline_detect_iminsert=1
 let g:airline_inactive_collapse=1
 if !exists('g:airline_symbols')
-    let g:airline_symbols={}
+  let g:airline_symbols={}
 endif
 let g:airline_left_sep=''
 let g:airline_left_alt_sep=''
@@ -584,7 +581,6 @@ let g:rbpt_colorpairs=[
     \ ['red',         'firebrick3'], ]
 let g:rbpt_max=16
 " }}}
-let g:snippets_dir=''
 " }}}
 " Filetype {{{
 " Turn on the filetype features, filetype plugins, and filetype indent now that
