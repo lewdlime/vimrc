@@ -588,4 +588,4 @@ let g:rbpt_max=16
 filetype on
 filetype plugin indent on
 " }}}
-" vim: fdm=marker ft=vim 
+" vim: fdm=marker ft=vim
