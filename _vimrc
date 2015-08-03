@@ -199,65 +199,36 @@ if 'VIRTUAL_ENV' in os.environ:
 EOF
 endif
 " }}}
-" AutoCommands {{{
-" Set Python scripts to use Python autocompletion
-au FileType python setlocal omnifunc=pythoncomplete#Complete
-" Make normal text not break up long lines, fold on markers
-au FileType txt,none setlocal textwidth=0 foldmethod=marker
-" Make XML fold on markers and not wrap
-au FileType xml,xhtml,svg,xsl,xslt,fo,rng setlocal textwidth=0 foldmethod=marker
-" Make Java and C code fold on syntax
-au FileType java,c setlocal textwidth=0 foldmethod=syntax
-" Make XML/HTML files have a wrap with tag command using \w
-if has("mac") || has("gui_gtk") || has("gui_x11")
-    au Filetype html,xml source $HOME/.vim/plugin/wrapwithtag.vim
-elseif has("win32") || has("win64")
-    au Filetype html,xml source $VIM\vimfiles\plugin\wrapwithtag.vim
-endif
-" jsbeautify
-autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
-autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
-autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
-" }}}
 " Vim Settings {{{
-" Set terminal colors to 256 colors
+syntax on
+" Terminal colors to 256 colors
 set t_Co=256
-" Set statusline characters
+" Statusline characters
 set fillchars+=stl:\ ,stlnc:\
-" Set embedded terminal as UTF-8, regardless of terminal
+" Embedded terminal as UTF-8, regardless of terminal
 set termencoding=utf-8
-" Set sessions to save open tabs and globals
+" Sessions to save open tabs and globals
 set sessionoptions+=tabpages,globals
-" 'spellcheck' is disabled by default
-" To enable again, use:
-"setlocal spell spelllang=en_us
 " Load 'matchit.vim'
 runtime macros/matchit.vim
-" Set leader character to ','
-"let mapleader=','
 " Let window redrawing take it's time
 set lazyredraw
-" Sets buffers to be hidden when abandoned, not unloaded.
+" Sets buffers to be hidden when abandoned, not unloaded
 set hidden
-" Turn modeline on so files with a modeline comment open with assigned
-" settings
+" Modeline on so files with a modeline comment open with assigned settings
 set modeline
-" Turn syntax on. 'Highlight colors are overruled but links are kept'
-syntax on
-" Use syntax-based omnicomplete, set omnicomplete options
+" Syntax-based omnicomplete, omnicomplete options
 set omnifunc=syntaxcomplete#Complete completeopt=menu,menuone,longest,preview
 " Tabs converted to 4 spaces
 set shiftwidth=4 tabstop=4 backspace=indent,eol,start expandtab smarttab
-" Set text and file encoding to Unicode, set line endings to UNIX
+" Text and file encoding to Unicode, line endings to UNIX \n
 set encoding=utf-8 fileencodings=utf-8 fileformat=unix
 " GUI settings {{{
 if has('gui_running')
     if has('gui_macvim')
-        " because MacVim is mean
         set background=dark
         colorscheme earendel
         set lines=48 columns=180
-        " Set windows to be slightly see-through; MacVim-only
         set transparency=8
         nmap <D-s> :w<CR>
         imap <D-s> <Esc>:w<CR>
@@ -273,7 +244,6 @@ else
     set title
     runtime! plugin/google_python_style.vim
     "colorscheme nuvola
-    " Color scheme for music editing
     set background=dark
     "colorscheme brookstream
     colorscheme earendel
@@ -293,11 +263,11 @@ set statusline+=%f\
 set statusline+=%h%m%r%w
 " git status
 if isdirectory(expand('~/.vim/bundle/fugitive', ':p'))
-    set statusline+=%{fugitive#statusline()}
+  set statusline+=%{fugitive#statusline()}
 endif
 " Syntastic status - makes sense with :Errors
 if isdirectory(expand('~/.vim/bundle/syntastic', ':p'))
-    set statusline+=%{SyntasticStatuslineFlag()}
+  set statusline+=%{SyntasticStatuslineFlag()}
 endif
 " file type
 set statusline+=\[%{strlen(&ft)?&ft:'none'}]
@@ -310,38 +280,60 @@ set statusline+=%-14(%l,%c%V%)
 " file position
 set statusline+=%<%P
 " }}}
-" Set foldmethod to marker by default
+" foldmethod is marker by default
 set foldmethod=marker
-" Show position of cursor & show commands that have been entered
+" Position of cursor & commands that have been entered
 set ruler showcmd
 " Incremental search & ignore case during searches
 set incsearch ignorecase
 " Make /g flag default when doing :s
 set gdefault
-" Show line numbers, enable wildmenu, set completion mode to list all matches
+" line numbers, enable wildmenu, completion mode to list all matches
 set number wildmenu wildmode=list:longest
-" Show current editing mode & show warnings/errors visually and audibly
-set showmode visualbell
+" Warnings/errors visually and audibly
+set visualbell
 " Ignore certain filetypes when doing filename completion
 set wildignore=*.sw*,*.pyc,*.bak
-" Show matching brackets, bracket blinking
+" Matching brackets, bracket blinking
 set showmatch matchtime=2
 " Split new window below current one
 set splitbelow
-" Automatically read files which have been changed outside of Vim, if we
-" haven't changed it already.
+" Automatically read files changed outside of Vim
 set autoread
 " Have vim scroll like Linux, not Windows
 set scrolloff=1
-" Reformatting options. See `:help fo-table`
+" Reformatting options, see :help fo-table
 set formatoptions+=lnor1
-" Disable spellcheck by default
-set nospell
+" Disable spellcheck & editing mode display by default
+" (vim-airline handles mode display)
+set nospell noshowmode
 " diff setting
 set diffexpr=MyDiff()
-" Set colors for omnicompletion popup menu
+" Colors for omnicompletion popup menu
 highlight Pmenu guibg=brown gui=bold
 highlight Pmenu ctermbg=238 gui=bold
+" }}}
+" AutoCommands {{{
+" Python scripts use Python autocompletion
+au FileType python setlocal omnifunc=pythoncomplete#Complete
+" Normal text not break up long lines, fold on markers
+au FileType txt,none setlocal textwidth=0 foldmethod=marker
+" XML fold on markers and not wrap
+au FileType xml,xhtml,svg,xsl,xslt,fo,rng setlocal textwidth=0 foldmethod=marker
+" Java and C code fold on syntax
+au FileType java,c setlocal textwidth=0 foldmethod=syntax
+" VimL fold on markers and have tab at 2 spaces
+au FileType vim setlocal tabstop=2
+" Make XML/HTML files have a wrap with tag command using \w
+if has("mac") || has("gui_gtk") || has("gui_x11")
+    au Filetype html,xml source $HOME/.vim/plugin/wrapwithtag.vim
+elseif has("win32") || has("win64")
+    au Filetype html,xml source $VIM\vimfiles\plugin\wrapwithtag.vim
+endif
+" jsbeautify
+autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
+autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
+autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
 " }}}
 " Functions {{{
 " SmartTab completion
