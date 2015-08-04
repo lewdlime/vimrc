@@ -201,6 +201,8 @@ endif
 " }}}
 " Vim Settings {{{
 syntax on
+" Allow paste mode
+set paste
 " Terminal colors to 256 colors
 set t_Co=256
 " Statusline characters
@@ -317,13 +319,13 @@ highlight Pmenu ctermbg=238 gui=bold
 " Python scripts use Python autocompletion
 au FileType python setlocal omnifunc=pythoncomplete#Complete
 " Normal text not break up long lines, fold on markers
-au FileType txt,none setlocal textwidth=0 foldmethod=marker
+au FileType txt,none setlocal foldmethod=marker textwidth=0
 " XML fold on markers and not wrap
-au FileType xml,xhtml,svg,xsl,xslt,fo,rng setlocal textwidth=0 foldmethod=marker
+au FileType xml,xhtml,svg,xsl,xslt,fo,rng setlocal foldmethod=marker textwidth=0
 " Java and C code fold on syntax
-au FileType java,c setlocal textwidth=0 foldmethod=syntax
+au FileType java,c setlocal foldmethod=syntax textwidth=0
 " VimL fold on markers and have tab at 2 spaces
-au FileType vim setlocal tabstop=2
+au FileType vim setlocal foldmethod=marker tabstop=2 shiftwidth=2
 " Make XML/HTML files have a wrap with tag command using \w
 if has("mac") || has("gui_gtk") || has("gui_x11")
     au Filetype html,xml source $HOME/.vim/plugin/wrapwithtag.vim
@@ -517,6 +519,8 @@ let g:airline#extensions#promptline#enabled=1
 let airline#extensions#promptline#color_template='normal'
 let g:airline#extensions#ctrlspace#enabled=1
 " }}}
+" ag.vim
+let g:ackprg='ag --vimgrep'
 " Ultisnips
 " let g:UltiSnipsExpandTrigger='<tab>'
 let g:UltiSnipsJumpForwardTrigger='<c-b>'
