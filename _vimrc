@@ -419,7 +419,9 @@ inoremap <expr> <CR>  pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 inoremap <expr> <C-n> pumvisible() ? '<C-n>' : '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 snoremap <expr> <C-p> pumvisible() ? '<C-n>' : '<C-p><C-r>=pumvisible() ? "\<lt>Up>" : ""<CR>'
 " Sort word in a line with <F2>
-vnoremap <F2> d:execute 'normal i' . join(sort(split(getreg('"'))), ' ')<CR>
+vnoremap <F4> d:execute 'normal i' . join(sort(split(getreg('"'))), ' ')<CR>
+nnoremap <F4> :set invpaste paste?<CR>
+set pastetoggle=<F2>
 " To save, press ctrl-s.
 nmap <c-s> :w<CR>
 imap <c-s> <Esc>:w<CR>a
