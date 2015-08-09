@@ -14,9 +14,9 @@ filetype off
 call pathogen#infect()
 " Add vundle to the runtimepath
 if has('win32' || 'win64')
-    set runtimepath+=$VIM\vimfiles\bundle\Vundle.vim\
+  set runtimepath+=$VIM\vimfiles\bundle\Vundle.vim\
 else
-    set runtimepath+=~/.vim/bundle/Vundle.vim/
+  set runtimepath+=~/.vim/bundle/Vundle.vim/
 endif
 call vundle#rc()
 call vundle#begin()
@@ -201,8 +201,6 @@ endif
 " }}}
 " Vim Settings {{{
 syntax on
-" Allow paste mode
-set paste
 " Terminal colors to 256 colors
 set t_Co=256
 " Statusline characters
