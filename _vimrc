@@ -619,10 +619,12 @@ let g:rbpt_colorpairs=[
 let g:rbpt_max=16
 " }}}
 " vim-force.com {{{
-let g:apex_backup_folder='$HOME/Documents/Projects/sources/sf_backup'
-let g:apex_temp_folder='$HOME/Documents/Projects/sources/sf_backup/temp'
-let g:apex_properties_folder='$HOME/Documents/Projects/sources/sf_backup/resources'
-let g:apex_tooling_force_dot_com_path='/Library/Java/Extensions'
+if has('gui_macvim')
+  let g:apex_backup_folder='$HOME/Documents/Projects/sources/sf_backup'
+  let g:apex_temp_folder='$HOME/Documents/Projects/sources/sf_backup/temp'
+  let g:apex_properties_folder='$HOME/Documents/Projects/sources/sf_backup/resources'
+  let g:apex_tooling_force_dot_com_path='/Library/Java/Extensions'
+endif
 " }}}
 " }}}
 " Filetype {{{
