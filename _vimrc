@@ -20,6 +20,7 @@ else
 endif
 call vundle#rc()
 call vundle#begin()
+" }}}
 " Required
 Plugin 'gmarik/Vundle.vim'
 " Only use this fork for Windows.
@@ -36,8 +37,8 @@ if has("mac")
     Plugin 'rizzatti/dash.vim'
 endif
 " See also: https://github.com/google/vroom.git
-"Plugin 'ervandew/supertab'
-Plugin 'Shougo/neocomplcache.vim'
+Plugin 'ervandew/supertab'
+"Plugin 'Shougo/neocomplete.vim'
 Plugin 'Shougo/unite.vim'
 Plugin 'Shougo/vimfiler.vim'
 Plugin 'Shougo/vimshell.vim'
@@ -429,9 +430,8 @@ nmap <leader>9 <Plug>AirlineSelectTab9
 "inoremap <expr> <Space> pumvisible() ? '\<C-y>' : ' '
 " neocomplete
 inoremap <silent> <CR> <C-r>=<SID>neocomplete_cr()<CR>
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><TAB>  pumvisible() ? '\<C-n>' : '\<TAB>'
+inoremap <expr><C-h> neocomplete#smart_close_popup().'\<C-h>'
 inoremap <expr><C-y>  neocomplete#close_popup()
 inoremap <expr><C-e>  neocomplete#cancel_popup()
 " ide-popup.vim
@@ -556,34 +556,34 @@ let g:UltiSnipsEditSplit='vertical'
 " This needs to be off for neocomplete to work.
 let g:acp_enableAtStartup=0
 " }}}
-" neocomplete {{{
-let g:neocomplete#enable_at_startup=1
-let g:neocomplete#enable_smart_case=1
-let g:neocomplete#enable_auto_select=1
-let g:neocomplete#enable_multibyte_completion=1
-if !exists('g:neocomplete#keyword_patterns')
-  let g:neocomplete#keyword_patterns={}
-endif
-let g:neocomplete#keyword_patterns['default']='\h\w*'
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns={}
-endif
-let g:neocomplete#sources#omni#input_patterns.php='[^. \t]->\h\w*\|\h\w*::'
-let g:neocomplete#sources#omni#input_patterns.c='[^.[:digit:] *\t]\%(\.\|->\)'
-let g:neocomplete#sources#omni#input_patterns.cpp='[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+" neocomplete (Requires lua support.) {{{
+"let g:neocomplete#enable_at_startup=1
+"let g:neocomplete#enable_smart_case=1
+"let g:neocomplete#enable_auto_select=1
+"let g:neocomplete#enable_multibyte_completion=1
+"if !exists('g:neocomplete#keyword_patterns')
+"  let g:neocomplete#keyword_patterns={}
+"endif
+"let g:neocomplete#keyword_patterns['default']='\h\w*'
+"if !exists('g:neocomplete#sources#omni#input_patterns')
+"  let g:neocomplete#sources#omni#input_patterns={}
+"endif
+"let g:neocomplete#sources#omni#input_patterns.php='[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.c='[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp='[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 " }}}
 " SuperTab {{{
-"let g:SuperTabDefaultCompletionType='<C-P>'
-"let g:SuperTabDefaultCompletionType='<C-X><C-U>'
-"let g:SuperTabDefaultCompletionType='<C-X><C-O>'
-"let g:SuperTabNoCompleteAfter=['^', '\s', '\t']
-"let g:SuperTabDefaultCompletionType='context'
-"let g:SuperTabContextDefaultCompletionType='<C-X><C-U>'
-"let g:SuperTabCompletionContexts=['s:ContextText', 's:ContextDiscover']
-"let g:SuperTabContextTextOmniPrecedence=['&omnifunc', '&completefunc']
-"let g:SuperTabContextDiscoverDiscovery=["&completefunc:<C-X><C-U>", "&omnifunc:<C-X><C-O>"]
-"let g:SuperTabRetainCompletionDuration='insert'
-"let g:SuperTabCompleteCase='ignorcase'
+let g:SuperTabDefaultCompletionType='<C-P>'
+let g:SuperTabDefaultCompletionType='<C-X><C-U>'
+let g:SuperTabDefaultCompletionType='<C-X><C-O>'
+let g:SuperTabNoCompleteAfter=['^', '\s', '\t']
+let g:SuperTabDefaultCompletionType='context'
+let g:SuperTabContextDefaultCompletionType='<C-X><C-U>'
+let g:SuperTabCompletionContexts=['s:ContextText', 's:ContextDiscover']
+let g:SuperTabContextTextOmniPrecedence=['&omnifunc', '&completefunc']
+let g:SuperTabContextDiscoverDiscovery=["&completefunc:<C-X><C-U>", "&omnifunc:<C-X><C-O>"]
+let g:SuperTabRetainCompletionDuration='insert'
+let g:SuperTabCompleteCase='ignorcase'
 " }}}
 " XML.vim: Fold XML tags, enable XML plugin on editing HTML,
 "     set XML tag syntax prefixes,
