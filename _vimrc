@@ -30,8 +30,12 @@ Plugin 'gmarik/Vundle.vim'
 " Powerline fonts are required for Powerline to be useful to Vim
 Plugin 'powerline/fonts'
 " Snippets {{{
+" Snippets 'engine'
+Plugin 'honza/vim-snippets'
+" Snippets controller
 Plugin 'SirVer/ultisnips'
-Plugin 'msanders/snipmate.vim'
+" Second snippets controller
+"Plugin 'msanders/snipmate.vim'
 " }}}
 " Original Bundles {{{
 if has("mac")
@@ -555,7 +559,7 @@ let g:UltiSnipsEditSplit='vertical'
 " }}}
 " AutoComplPop {{{
 " This needs to be off for neocomplete to work.
-let g:acp_enableAtStartup=0
+"let g:acp_enableAtStartup=0
 " }}}
 " neocomplete (Requires lua support.) {{{
 "let g:neocomplete#enable_at_startup=1
