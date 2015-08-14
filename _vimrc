@@ -221,7 +221,7 @@ set lazyredraw
 " Sets buffers to be hidden when abandoned, not unloaded
 set hidden
 " Modeline on so files with a modeline comment open with assigned settings
-set modeline
+"set modeline
 " Syntax-based omnicomplete, omnicomplete options
 set omnifunc=syntaxcomplete#Complete completeopt=menu,menuone,longest,preview
 " Tabs converted to 4 spaces
