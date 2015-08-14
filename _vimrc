@@ -14,9 +14,9 @@ filetype off
 call pathogen#infect()
 " Add vundle to the runtimepath
 if has('win32' || 'win64')
-  set runtimepath+=$VIM\vimfiles\bundle\Vundle.vim\
+    set runtimepath+=$VIM\vimfiles\bundle\Vundle.vim\
 else
-  set runtimepath+=~/.vim/bundle/Vundle.vim/
+    set runtimepath+=~/.vim/bundle/Vundle.vim/
 endif
 call vundle#rc()
 call vundle#begin()
@@ -36,6 +36,8 @@ if has("mac")
     Plugin 'rizzatti/dash.vim'
 endif
 " See also: https://github.com/google/vroom.git
+"Plugin 'ervandew/supertab'
+Plugin 'Shougo/neocomplcache.vim'
 Plugin 'Shougo/unite.vim'
 Plugin 'Shougo/vimfiler.vim'
 Plugin 'Shougo/vimshell.vim'
@@ -46,7 +48,6 @@ Plugin 'chiphogg/vim-vtd'
 Plugin 'chrisbra/csv.vim'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'edkolev/promptline.vim'
-Plugin 'ervandew/supertab'
 Plugin 'gcmt/taboo.vim'
 Plugin 'google/vim-codefmt'
 Plugin 'google/vim-coverage'
@@ -199,6 +200,8 @@ endif
 " }}}
 " Vim Settings {{{
 syntax on
+" Allow paste mode
+set paste
 " Terminal colors to 256 colors
 set t_Co=256
 " Statusline characters
@@ -313,7 +316,11 @@ highlight Pmenu ctermbg=238 gui=bold
 " }}}
 " AutoCommands {{{
 " Python scripts use Python autocompletion
+au FileType css setlocal omnifunc=csscomplete#CompleteCSS
+au FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+au FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 au FileType python setlocal omnifunc=pythoncomplete#Complete
+au FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 " Normal text not break up long lines, fold on markers
 au FileType txt,none setlocal foldmethod=marker textwidth=0
 " XML fold on markers and not wrap
@@ -334,7 +341,13 @@ autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
 autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
 " }}}
 " Functions {{{
-" SmartTab completion
+" neocomplete_cr() {{{
+function! s:neocomplete_cr()
+  return neocomplete#close_popup() . "\<CR>"
+  "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+endfunction
+" }}}
+" SmartTabComplete() {{{
 function! SmartTabComplete()
   let line=getline('.')                         " current line
   let substr=strpart(line, -1, col('.')+1)      " from the start of the current
@@ -354,7 +367,8 @@ function! SmartTabComplete()
     return '\<C-X>\<C-O>'                         " plugin matching
   endif
 endfunction
-" HighlightRepeats
+" }}}
+" HighlightRepeats() {{{
 function! HighlightRepeats() range
   let lineCounts={}
   let lineNum=a:firstline
@@ -373,7 +387,8 @@ function! HighlightRepeats() range
   endfor
 endfunction
 command! -range=% HighlightRepeats <line1>,<line2>call HighlightRepeats()
-" diff function {{{
+" }}}
+" MyDiff() {{{
 function! MyDiff()
   let opt='-a --binary '
   if &diffopt =~ 'icase' | let opt=opt . '-i ' | endif
@@ -410,6 +425,13 @@ nmap <leader>6 <Plug>AirlineSelectTab6
 nmap <leader>7 <Plug>AirlineSelectTab7
 nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
+" neocomplete
+inoremap <silent> <CR> <C-r>=<SID>neocomplete_cr()<CR>
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplete#close_popup()
+inoremap <expr><C-e>  neocomplete#cancel_popup()
 " ide-popup.vim
 inoremap <expr> <CR>  pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 inoremap <expr> <C-n> pumvisible() ? '<C-n>' : '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
@@ -519,28 +541,36 @@ let g:airline#extensions#ctrlspace#enabled=1
 " }}}
 " ag.vim
 let g:ackprg='ag --vimgrep'
-" Ultisnips
+" AutoComplPop {{{
+" This needs to be off for neocomplete to work.
+let g:acp_enableAtStartup=0
+" }}}
+" Ultisnips {{{
 " let g:UltiSnipsExpandTrigger='<tab>'
 let g:UltiSnipsJumpForwardTrigger='<c-b>'
 let g:UltiSnipsJumpBackwardTrigger='<c-z>'
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit='vertical'
+" }}}
 " Pyflakes
 let g:pyflakes_use_quickfix=0
-" PEP8
-let g:pep8_map='<leader>8'
+" neocomplete {{{
+let g:neocomplete#enable_at_startup=1
+let g:neocomplete#enable_smart_case=1
+let g:neocomplete#enable_auto_select = 1
+" }}}
 " SuperTab {{{
 "let g:SuperTabDefaultCompletionType='<C-P>'
-"let g:SuperTabDefaultCompletionType='<C-X><C-V>'
+"let g:SuperTabDefaultCompletionType='<C-X><C-U>'
 "let g:SuperTabDefaultCompletionType='<C-X><C-O>'
-let g:SuperTabDefaultCompletionType='context'
-let g:SuperTabContextDefaultCompletionType='context'
-let g:SuperTabCompletionContexts=['s:ContextText', 's:ContextDiscover']
-let g:SuperTabContextTextOmniPrecedence=['&omnifunc', '&completefunc']
-let g:SuperTabContextDiscoverDiscovery=["&completefunc:<C-X><C-U>", "&omnifunc:<c-x><c-o>"]
-let g:SuperTabRetainCompletionDuration='insert'
-let g:SuperTabNoCompleteAfter=['^', '\s', '\t']
-let g:SuperTabCompleteCase='ignorcase'
+"let g:SuperTabNoCompleteAfter=['^', '\s', '\t']
+"let g:SuperTabDefaultCompletionType='context'
+"let g:SuperTabContextDefaultCompletionType='<C-X><C-U>'
+"let g:SuperTabCompletionContexts=['s:ContextText', 's:ContextDiscover']
+"let g:SuperTabContextTextOmniPrecedence=['&omnifunc', '&completefunc']
+"let g:SuperTabContextDiscoverDiscovery=["&completefunc:<C-X><C-U>", "&omnifunc:<C-X><C-O>"]
+"let g:SuperTabRetainCompletionDuration='insert'
+"let g:SuperTabCompleteCase='ignorcase'
 " }}}
 " XML.vim: Fold XML tags, enable XML plugin on editing HTML,
 "     set XML tag syntax prefixes,
@@ -574,6 +604,12 @@ let g:rbpt_colorpairs=[
     \ ['darkred',     'DarkOrchid3'],
     \ ['red',         'firebrick3'], ]
 let g:rbpt_max=16
+" }}}
+" vim-force.com {{{
+let g:apex_backup_folder='$HOME/Documents/Projects/sources/sf_backup'
+let g:apex_temp_folder='$HOME/Documents/Projects/sources/sf_backup/temp'
+let g:apex_properties_folder='$HOME/Documents/Projects/sources/sf_backup/resources'
+let g:apex_tooling_force_dot_com_path='/Library/Java/Extensions'
 " }}}
 " }}}
 " Filetype {{{
