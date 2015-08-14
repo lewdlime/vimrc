@@ -206,8 +206,6 @@ endif
 " }}}
 " Vim Settings {{{
 syntax on
-" Allow paste mode
-set paste
 " Terminal colors to 256 colors
 set t_Co=256
 " Statusline characters
