@@ -8,6 +8,7 @@ set nocompatible nobackup
 " USE THE OLD REGEX ENGINE
 set re=1
 " Vundle Init {{{
+" Vundle Startup {{{
 " Filetype MUST be off for vundle!
 filetype off
 " Load pathogen
@@ -20,11 +21,11 @@ else
 endif
 call vundle#rc()
 call vundle#begin()
-" }}}
 " Required
 Plugin 'gmarik/Vundle.vim'
 " Only use this fork for Windows.
 "Plugin 'laughingman182/Vundle.vim'
+" }}}
 " Bundles {{{
 " Powerline fonts are required for Powerline to be useful to Vim
 Plugin 'powerline/fonts'
@@ -316,7 +317,7 @@ highlight Pmenu guibg=brown gui=bold
 highlight Pmenu ctermbg=238 gui=bold
 " }}}
 " AutoCommands {{{
-" Python scripts use Python autocompletion
+" autocompletion
 au FileType css setlocal omnifunc=csscomplete#CompleteCSS
 au FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 au FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
@@ -337,37 +338,37 @@ elseif has("win32") || has("win64")
     au Filetype html,xml source $VIM\vimfiles\plugin\wrapwithtag.vim
 endif
 " jsbeautify
-autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
-autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
-autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
+au FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
+au FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
+au FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
 " }}}
 " Functions {{{
 " neocomplete_cr() {{{
-function! s:neocomplete_cr()
-  return neocomplete#close_popup() . "\<CR>"
-  "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-endfunction
+"function! s:neocomplete_cr()
+"  return neocomplete#close_popup() . '\<CR>'
+"  return pumvisible() ? neocomplete#close_popup() : '\<CR>'
+"endfunction
 " }}}
 " SmartTabComplete() {{{
-function! SmartTabComplete()
-  let line=getline('.')                         " current line
-  let substr=strpart(line, -1, col('.')+1)      " from the start of the current
-                                                  " line to one character right
-                                                  " of the cursor
-  let substr=matchstr(substr, "[^ \t]*$")       " word till cursor
-  if(strlen(substr)==0)                           " nothing to match on empty string
-    return '\<tab>'
-  endif
-  let has_period=match(substr, '\.') != -1      " position of period, if any
-  let has_slash=match(substr, '\/') != -1       " position of slash, if any
-  if (!has_period && !has_slash)
-    return '\<C-X>\<C-P>'                         " existing text matching
-  elseif(has_slash)
-    return '\<C-X>\<C-F>'                         " file matching
-  else
-    return '\<C-X>\<C-O>'                         " plugin matching
-  endif
-endfunction
+"function! SmartTabComplete()
+"  let line=getline('.')                         " current line
+"  let substr=strpart(line, -1, col('.')+1)      " from the start of the current
+                                                " line to one character right
+                                                " of the cursor
+"  let substr=matchstr(substr, "[^ \t]*$")       " word till cursor
+"  if(strlen(substr)==0)                         " nothing to match on empty string
+"    return '\<tab>'
+"  endif
+"  let has_period=match(substr, '\.') != -1      " position of period, if any
+"  let has_slash=match(substr, '\/') != -1       " position of slash, if any
+"  if (!has_period && !has_slash)
+"    return '\<C-X>\<C-P>'                       " existing text matching
+"  elseif(has_slash)
+"    return '\<C-X>\<C-F>'                       " file matching
+"  else
+"    return '\<C-X>\<C-O>'                       " plugin matching
+"  endif
+"endfunction
 " }}}
 " HighlightRepeats() {{{
 function! HighlightRepeats() range
