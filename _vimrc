@@ -541,10 +541,8 @@ let g:airline#extensions#ctrlspace#enabled=1
 " }}}
 " ag.vim
 let g:ackprg='ag --vimgrep'
-" AutoComplPop {{{
-" This needs to be off for neocomplete to work.
-let g:acp_enableAtStartup=0
-" }}}
+" Pyflakes
+let g:pyflakes_use_quickfix=0
 " Ultisnips {{{
 " let g:UltiSnipsExpandTrigger='<tab>'
 let g:UltiSnipsJumpForwardTrigger='<c-b>'
@@ -552,12 +550,25 @@ let g:UltiSnipsJumpBackwardTrigger='<c-z>'
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit='vertical'
 " }}}
-" Pyflakes
-let g:pyflakes_use_quickfix=0
+" AutoComplPop {{{
+" This needs to be off for neocomplete to work.
+let g:acp_enableAtStartup=0
+" }}}
 " neocomplete {{{
 let g:neocomplete#enable_at_startup=1
 let g:neocomplete#enable_smart_case=1
-let g:neocomplete#enable_auto_select = 1
+let g:neocomplete#enable_auto_select=1
+let g:neocomplete#enable_multibyte_completion=1
+if !exists('g:neocomplete#keyword_patterns')
+  let g:neocomplete#keyword_patterns={}
+endif
+let g:neocomplete#keyword_patterns['default']='\h\w*'
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns={}
+endif
+let g:neocomplete#sources#omni#input_patterns.php='[^. \t]->\h\w*\|\h\w*::'
+let g:neocomplete#sources#omni#input_patterns.c='[^.[:digit:] *\t]\%(\.\|->\)'
+let g:neocomplete#sources#omni#input_patterns.cpp='[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 " }}}
 " SuperTab {{{
 "let g:SuperTabDefaultCompletionType='<C-P>'
@@ -582,7 +593,7 @@ let g:vimclojure#ParenRainbow=1
 let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
 " Syntastic
 let g:syntastic_enable_signs=1
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['java'] }
+let g:syntastic_mode_map={ 'mode': 'active', 'passive_filetypes': ['java'] }
 " Taboo.vim
 let g:taboo_tab_format=' %n %f%m '
 " Rainbow Parentheses {{{
