@@ -24,7 +24,7 @@ call vundle#begin()
 " Required
 Plugin 'gmarik/Vundle.vim'
 " Only use this fork for Windows.
-"Plugin 'laughingman182/Vundle.vim'
+"Plugin 'leesavide/Vundle.vim'
 " }}}
 " Bundles {{{
 " Powerline fonts are required for Powerline to be useful to Vim
