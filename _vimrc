@@ -28,7 +28,7 @@ Plugin 'gmarik/Vundle.vim'
 " }}}
 " Bundles {{{
 " Powerline fonts are required for Powerline to be useful to Vim
-Plugin 'powerline/fonts'
+"Plugin 'powerline/fonts'
 " Snippets {{{
 " Snippets 'engine'
 Plugin 'honza/vim-snippets'
@@ -52,6 +52,7 @@ Plugin 'bling/vim-airline'
 Plugin 'bling/vim-bufferline'
 Plugin 'chiphogg/vim-vtd'
 Plugin 'chrisbra/csv.vim'
+Plugin 'dag/vim-fish'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'edkolev/promptline.vim'
 Plugin 'gcmt/taboo.vim'
