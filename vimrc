@@ -40,7 +40,7 @@ Plug 'kien/rainbow_parentheses.vim'
 Plug 'luochen1990/rainbow'
 Plug 'mileszs/ack.vim'
 Plug 'reinh/vim-makegreen'
-Plug 'rking/ag.vim'
+
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'sjl/gundo.vim'
@@ -70,12 +70,18 @@ Plug 'kshenoy/vim-signature'
 Plug 'szw/vim-ctrlspace'
 Plug 'wincent/Command-T'
 " }}}
-" Mac OS X {{{
-if has("mac")
+" Cross Platform {{{
+" Specific to Mac OS X
+if has('mac')
   Plug 'rizzatti/dash.vim'
 endif
+" All BUT Windows
+if has(!'win32') || has(!'win64')
+  Plug 'wincent/ferret'
+  Plug 'rking/ag.vim'
+endif
 " }}}
-" Statusline {{{
+" Status Line {{{
 Plug 'bling/vim-airline'
 Plug 'bling/vim-bufferline'
 Plug 'edkolev/promptline.vim'
@@ -110,7 +116,6 @@ Plug 'mattn/gist-vim'
 Plug 'rdolgushin/gitignore.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
-Plug 'wincent/ferret'
 " }}}
 " Themes {{{
 Plug 'Colour-Sampler-Pack'
