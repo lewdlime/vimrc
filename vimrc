@@ -40,7 +40,6 @@ Plug 'kien/rainbow_parentheses.vim'
 Plug 'luochen1990/rainbow'
 Plug 'mileszs/ack.vim'
 Plug 'reinh/vim-makegreen'
-
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'sjl/gundo.vim'
