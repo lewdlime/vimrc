@@ -13,7 +13,7 @@ set magic
 " Vim-Plug Startup {{{
 " Load pathogen
 call pathogen#infect()
-call plug#begin('~/.vim/plugged')
+call plug#begin('$VIM\vimfiles\plugged')
 " }}}
 " Bundles {{{
 " Original Bundles {{{
@@ -34,7 +34,6 @@ Plug 'Shougo/unite.vim'
 Plug 'Shougo/vimfiler.vim'
 Plug 'Shougo/vimshell.vim'
 Plug 'benmills/vimux'
-Plug 'chiphogg/vim-vtd'
 Plug 'gcmt/taboo.vim'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'luochen1990/rainbow'
@@ -76,6 +75,7 @@ if has('mac')
 endif
 " All BUT Windows
 if has(!'win32') || has(!'win64')
+  Plug 'chiphogg/vim-vtd'
   Plug 'wincent/ferret'
   Plug 'rking/ag.vim'
 endif
