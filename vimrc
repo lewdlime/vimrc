@@ -13,6 +13,7 @@ set magic
 " Vim-Plug Startup {{{
 " Load pathogen
 call pathogen#infect()
+set rtp+='$VIM\vimfiles\plugged'
 call plug#begin('$VIM\vimfiles\plugged')
 " }}}
 " Bundles {{{
