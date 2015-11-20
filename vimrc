@@ -87,6 +87,7 @@ Plug 'bling/vim-bufferline'
 Plug 'edkolev/promptline.vim'
 " }}}
 " Syntax and Filetypes {{{
+Plug 'Notre1/as400.vim'
 Plug 'chrisbra/csv.vim'
 Plug 'dag/vim-fish'
 Plug 'kchmck/vim-coffee-script'
