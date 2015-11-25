@@ -44,7 +44,6 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'sjl/gundo.vim'
 Plug 'syngan/vim-vimlint'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'tomtom/quickfixsigns_vim'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-classpath'
@@ -58,8 +57,23 @@ Plug 'tpope/vim-surround'
 Plug 'triglav/vim-visual-increment'
 Plug 'weierophinney/vimwiki'
 Plug 'wesleyche/Trinity'
-Plug 'weynhamz/vim-plugin-minibufexpl'
+"Plug 'weynhamz/vim-plugin-minibufexpl'
+
 Plug 'wincent/terminus'
+" }}}
+" Essentials {{{
+Plug 'amix/open_file_under_cursor.vim'
+Plug 'amix/vim-zenroom2'
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+Plug 'mattn/emmet-vim'
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'scrooloose/syntastic'
+Plug 'swaroopch/vim-markdown-preview'
+Plug 'terryma/vim-expand-region'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-markdown'
 " }}}
 " Movement and Marks {{{
 Plug 'gcmt/breeze.vim'
@@ -92,12 +106,10 @@ Plug 'chrisbra/csv.vim'
 Plug 'dag/vim-fish'
 Plug 'kchmck/vim-coffee-script'
 Plug 'klen/python-mode'
-Plug 'mattn/emmet-vim'
 Plug 'mitechie/pyflakes-pathogen'
 Plug 'neowit/vim-force.com'
-Plug 'scrooloose/syntastic'
+Plug 'sophacles/vim-bundle-mako'
 Plug 'sukima/xmledit'
-Plug 'swaroopch/vim-markdown-preview'
 " }}}
 " Google {{{
 " See also: https://github.com/google/vroom.git
@@ -120,12 +132,15 @@ Plug 'tpope/vim-git'
 " }}}
 " Themes {{{
 Plug 'Colour-Sampler-Pack'
-Plug 'flazz/vim-colorschemes'
 Plug 'altercation/vim-colors-solarized'
 Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'crucerucalin/peaksea.vim'
+Plug 'flazz/vim-colorschemes'
 Plug 'google/vim-colorscheme-primary'
 Plug 'itchyny/landscape.vim'
+Plug 'therubymug/vim-pyte'
 Plug 'tpope/vim-vividchalk'
+Plug 'wesgibbs/vim-irblack'
 " }}}
 " vim-scripts {{{
 "Plugin 'AutoComplPop'
@@ -143,6 +158,8 @@ Plug 'cecutil'
 Plug 'cppcomplete'
 Plug 'listmaps.vim'
 Plug 'matchit.zip'
+Plug 'mayansmoke'
+Plug 'nginx.vim'
 Plug 'taglist.vim'
 Plug 'utl.vim'
 Plug 'vim_faq'
@@ -262,8 +279,8 @@ set number numberwidth=5 wildmenu wildmode=list:longest wildignore=*.sw*,*.pyc,*
 set visualbell
 " Show matching brackets/parentheses/braces, bracket blinking
 set showmatch matchtime=2
-" Split new window below current one
-set splitbelow
+" Split new window below & to the right of current window
+set splitbelow splitright
 " Automatically read files changed outside of Vim
 set autoread
 " Have vim scroll like Linux, not Windows
