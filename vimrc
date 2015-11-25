@@ -161,7 +161,7 @@ call pathogen#helptags()
 if has('gui_running')
   if has('gui_macvim')
     set background=dark
-    colorscheme earendel
+    "colorscheme earendel
     set lines=48 columns=180
     set transparency=8
     nmap <D-s> :w<CR>
@@ -170,7 +170,7 @@ if has('gui_running')
   endif
   runtime! indent/google_python_style.vim
   set background=dark
-  colorscheme earendel
+  colorscheme primary
   let do_syntax_sel_menu=1
   runtime! synmenu.vim
 else
@@ -180,7 +180,8 @@ else
   "colorscheme nuvola
   set background=dark
   "colorscheme brookstream
-  colorscheme earendel
+  "colorscheme earendel
+  colorscheme primary
   aunmenu &Syntax.&Show\ filetypes\ in\ menu
 endif
 " }}}
@@ -210,6 +211,10 @@ set statusline+=%=0x%-8B%-14(%l,%c%V%)%<%P
 " }}}
 " Syntax highlighting on
 syntax on
+" Enable all python highlighting features
+let python_highlight_all=1
+" Show visible line under cursor's current line
+set cursorline
 " Set leader key to be able to use special mappings
 let mapleader=','
 let g:mapleader=','
@@ -255,7 +260,7 @@ set gdefault
 set number numberwidth=5 wildmenu wildmode=list:longest wildignore=*.sw*,*.pyc,*.bak
 " Warnings/errors visually and audibly
 set visualbell
-" Matching brackets, bracket blinking
+" Show matching brackets/parentheses/braces, bracket blinking
 set showmatch matchtime=2
 " Split new window below current one
 set splitbelow
