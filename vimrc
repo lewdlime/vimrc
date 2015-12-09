@@ -6,7 +6,7 @@
 " Also, set for Vim to not back up file(s) before saving.
 set nocompatible nobackup
 " Use the old regex engine
-set re=1
+set regexpengine=1
 " HUZZAH! BAP UN-BRONDO c(●▽● c)
 set magic
 " Vim-Plug {{{
@@ -58,7 +58,6 @@ Plug 'triglav/vim-visual-increment'
 Plug 'weierophinney/vimwiki'
 Plug 'wesleyche/Trinity'
 "Plug 'weynhamz/vim-plugin-minibufexpl'
-
 Plug 'wincent/terminus'
 " }}}
 " Essentials {{{
