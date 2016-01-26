@@ -80,7 +80,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'kien/ctrlp.vim'
 Plug 'kshenoy/vim-signature'
 Plug 'szw/vim-ctrlspace'
-Plug 'wincent/Command-T'
+"Plug 'wincent/command-t'
 " }}}
 " Cross Platform {{{
 " Specific to Mac OS X
