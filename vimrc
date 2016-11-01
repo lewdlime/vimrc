@@ -5,233 +5,194 @@
 " This must be first, because it changes other options as a side effect.
 " Also, set for Vim to not back up file(s) before saving.
 set nocompatible nobackup
-" Use the old regex engine
+" Use the old regex engine, because apparently backrefs are hard to implement
 set regexpengine=1
-" HUZZAH! BAP UN-BRONDO c(●▽● c)
+" HUZZAH! BAP UN-BRONDO *POOF* c(●▽● c) *wiggles arms, magical explosions*
 set magic
 " Vim-Plug {{{
-" Vim-Plug Startup {{{
-" Load pathogen
+" Startup
 call pathogen#infect()
 set rtp+='$VIM\vimfiles\plugged'
 call plug#begin('$VIM\vimfiles\plugged')
-" }}}
+" Bundle List {{{
 " Bundles {{{
-" Original Bundles {{{
-Plug 'tomtom/enabler_vim'
-" Completions {{{
-Plug 'ervandew/supertab'
-Plug 'dirkwallenstein/vim-autocomplpop'
-" }}}
-" Snippets {{{
-Plug 'honza/vim-snippets'
-Plug 'SirVer/ultisnips'
-Plug 'msanders/snipmate.vim'
-Plug 'mustache/vim-mustache-handlebars'
-" }}}
+"Plug 'gcmt/breeze.vim'
+"Plug 'itchyny/lightline.vim'
+"Plug 'kien/rainbow_parentheses.vim'
+"Plug 'mustache/vim-mustache-handlebars'
 "Plug 'powerline/fonts'
-" Generic Plugins {{{
+"Plug 'tpope/vim-abolish'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/vimfiler.vim'
 Plug 'Shougo/vimshell.vim'
+Plug 'WolfgangMehner/c.vim'
+Plug 'WolfgangMehner/vim-plugins'
+Plug 'airblade/vim-gitgutter'
+Plug 'amix/open_file_under_cursor.vim'
+Plug 'amix/vim-zenroom2'
 Plug 'benmills/vimux'
+Plug 'bling/vim-airline'
+Plug 'bling/vim-bufferline'
+Plug 'chrisbra/csv.vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'dirkwallenstein/vim-autocomplpop'
+Plug 'easymotion/vim-easymotion'
+Plug 'ervandew/notebook'
+Plug 'ervandew/supertab'
 Plug 'gcmt/taboo.vim'
-Plug 'kien/rainbow_parentheses.vim'
+Plug 'gregsexton/gitv'
+Plug 'honza/vim-snippets'
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+Plug 'kshenoy/vim-signature'
 Plug 'luochen1990/rainbow'
-Plug 'mileszs/ack.vim'
-Plug 'reinh/vim-makegreen'
+Plug 'majutsushi/tagbar'
+Plug 'mattn/emmet-vim'
+Plug 'oplatek/Conque-Shell'
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
 Plug 'sjl/gundo.vim'
+Plug 'sophacles/vim-bundle-mako'
+Plug 'sukima/xmledit'
 Plug 'syngan/vim-vimlint'
+Plug 'szw/vim-ctrlspace'
+Plug 'terryma/vim-expand-region'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'therubymug/vim-pyte'
+Plug 'tmhedberg/matchit'
+Plug 'tomtom/enabler_vim'
 Plug 'tomtom/quickfixsigns_vim'
-Plug 'tpope/vim-abolish'
-Plug 'tpope/vim-classpath'
+Plug 'tpope/vim-afterimage'
+Plug 'tpope/vim-characterize'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-fireplace'
 Plug 'tpope/vim-flagship'
-Plug 'tpope/vim-pathogen'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-git'
+Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
 Plug 'triglav/vim-visual-increment'
-Plug 'weierophinney/vimwiki'
-Plug 'wesleyche/Trinity'
-"Plug 'weynhamz/vim-plugin-minibufexpl'
-Plug 'wincent/terminus'
-" }}}
-" Essentials {{{
-Plug 'amix/open_file_under_cursor.vim'
-Plug 'amix/vim-zenroom2'
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
-Plug 'ktonga/vim-follow-my-lead'
-Plug 'mattn/emmet-vim'
-Plug 'michaeljsmith/vim-indent-object'
-Plug 'scrooloose/syntastic'
-Plug 'swaroopch/vim-markdown-preview'
-Plug 'terryma/vim-expand-region'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-markdown'
-" }}}
-" Movement and Marks {{{
-Plug 'gcmt/breeze.vim'
-Plug 'easymotion/vim-easymotion'
-Plug 'kien/ctrlp.vim'
-Plug 'kshenoy/vim-signature'
-Plug 'szw/vim-ctrlspace'
-"Plug 'wincent/command-t'
-" }}}
-" Cross Platform {{{
-" Specific to Mac OS X
-if has('mac')
-  Plug 'rizzatti/dash.vim'
-endif
-" All BUT Windows
-if has(!'win32') || has(!'win64')
-  Plug 'chiphogg/vim-vtd'
-  Plug 'wincent/ferret'
-  Plug 'rking/ag.vim'
-endif
-" }}}
-" Status Line {{{
-Plug 'bling/vim-airline'
-Plug 'bling/vim-bufferline'
-Plug 'edkolev/promptline.vim'
-" }}}
-" Syntax and Filetypes {{{
-Plug 'Notre1/as400.vim'
-Plug 'chrisbra/csv.vim'
-Plug 'dag/vim-fish'
-Plug 'kchmck/vim-coffee-script'
-"Plug 'klen/python-mode'
-Plug 'mitechie/pyflakes-pathogen'
-Plug 'neowit/vim-force.com'
-Plug 'sophacles/vim-bundle-mako'
-Plug 'sukima/xmledit'
-" }}}
+Plug 'vim-airline/vim-airline-themes'
+Plug 'will133/vim-dirdiff'
+Plug 'wincent/Command-T'
+Plug 'xolox/vim-easytags'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-notes'
 " Google {{{
 " See also: https://github.com/google/vroom.git
-Plug 'glts/vim-magnum'
-Plug 'glts/vim-radical'
-Plug 'google/vim-codefmt'
-Plug 'google/vim-coverage'
-Plug 'google/vim-ft-vroom'
-Plug 'google/vim-glaive'
-Plug 'google/vim-maktaba'
-Plug 'google/vim-syncopate'
-" }}}
-" Git {{{
-Plug 'airblade/vim-gitgutter'
-Plug 'gregsexton/gitv'
-Plug 'mattn/gist-vim'
-Plug 'rdolgushin/gitignore.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-git'
+" IMPORTANT: Vim seems to be having issues using Python.
+" For now, any Python-dependant vim plugins should be disabled.
+"Plug 'glts/vim-magnum'
+"Plug 'glts/vim-radical'
+"Plug 'google/vim-codefmt'
+"Plug 'google/vim-coverage'
+"Plug 'google/vim-ft-vroom'
+"Plug 'google/vim-glaive'
+"Plug 'google/vim-maktaba'
+"Plug 'google/vim-searchindex'
+"Plug 'google/vim-syncopate'
 " }}}
 " Themes {{{
+"Plug 'itchyny/landscape.vim'
 Plug 'Colour-Sampler-Pack'
 Plug 'altercation/vim-colors-solarized'
 Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'crucerucalin/peaksea.vim'
 Plug 'flazz/vim-colorschemes'
 Plug 'google/vim-colorscheme-primary'
-Plug 'itchyny/landscape.vim'
-Plug 'therubymug/vim-pyte'
+Plug 'ryanoasis/vim-devicons'
 Plug 'tpope/vim-vividchalk'
 Plug 'wesgibbs/vim-irblack'
 " }}}
+" Platform-Specific {{{
+if !has('win32') || !has('win64')
+  Plug 'SirVer/ultisnips'
+  Plug 'edkolev/promptline.vim'
+  Plug 'wincent/terminus'
+  Plug 'dag/vim-fish'
+  Plug 'klen/python-mode'
+  Plug 'wincent/ferret'
+  Plug 'mileszs/ack.vim'
+  Plug 'rking/ag.vim'
+else
+  Plug 'msanders/snipmate.vim'
+endif
+if has('mac')
+  Plug 'rizzatti/dash.vim'
+  Plug 'kchmck/vim-coffee-script'
+  Plug 'neowit/vim-force.com'
+endif
+" }}}
 " vim-scripts {{{
-"Plugin 'AutoComplPop'
-"Plugin 'L9'
-"Plugin 'changeColorScheme.vim'
 Plug 'AfterColors.vim'
-Plug 'Conque-Shell'
-Plug 'Csound-compiler-plugin'
-Plug 'DirDiff.vim'
 Plug 'DrawIt'
-Plug 'TaskList.vim'
-Plug 'Txtfmt-The-Vim-Highlighter'
-Plug 'c.vim'
 Plug 'cecutil'
 Plug 'cppcomplete'
 Plug 'listmaps.vim'
-Plug 'matchit.zip'
 Plug 'mayansmoke'
 Plug 'nginx.vim'
 Plug 'taglist.vim'
 Plug 'utl.vim'
 Plug 'vim_faq'
 " }}}
-" }}}
 " Non-Github Repos {{{
-
+" ToDo
+" }}}
 " }}}
 call plug#end()
-" This helps correct the duplicate help tags.
-call pathogen#helptags()
 " }}}
 " }}}
 " Vim Settings {{{
-" GUI settings {{{
-if has('gui_running')
-  if has('gui_macvim')
-    set background=dark
-    "colorscheme earendel
-    set lines=48 columns=180
-    set transparency=8
-    nmap <D-s> :w<CR>
-    imap <D-s> <Esc>:w<CR>
-    set macmeta
-  endif
-  runtime! indent/google_python_style.vim
-  set background=dark
-  colorscheme primary
-  let do_syntax_sel_menu=1
-  runtime! synmenu.vim
-else
-  " Sets window to have a title
-  set title
-  runtime! plugin/google_python_style.vim
-  "colorscheme nuvola
-  set background=dark
-  "colorscheme brookstream
-  "colorscheme earendel
-  colorscheme primary
-  aunmenu &Syntax.&Show\ filetypes\ in\ menu
+" Colorscheme {{{
+set background=dark
+colorscheme primary
+" }}}
+" Mac OS X Settings {{{
+if has('gui_macvim')
+  set transparency=8
+  nmap <D-s> :w<CR>
+  imap <D-s> <Esc>:w<CR>
+  set macmeta
 endif
 " }}}
-" Status line {{{
-" Show extra info in status line
+" Status Line {{{
+" Statusline characters
+set fillchars="vert:'|',fold:'',stl:'',stlnc:''"
+" Always show extra info in status line
 set laststatus=2
 " clear last format of status line
 set statusline=''
-" buffer number
-set statusline+=%-3.3n\
-" filename
-set statusline+=%f\
-" status flags
-set statusline+=%h%m%r%w
-" git status
-if isdirectory(expand('~/.vim/bundle/fugitive', ':p'))
-  set statusline+=%{fugitive#statusline()}
+" warning messages
+set statusline+=%#warningmsg#
+" buffer number, filename, status flags
+if isdirectory(expand('~/.vim/plugged/vim-bufferline', ':p')) || isdirectory(expand('$VIM/vimfiles/plugged/vim-bufferline', ':p'))
+  set statusline+='%{bufferline#refresh_status()}'
+else
+  set statusline+='%-3.3n\ %f\ '
+endif
+" Status flags
+set statusline+='%(%h%m%r%w%)'
+" Right aligned: character value, line, character, file position
+set statusline+='%=0x%-8B%-14(%l,%c%V%)%<%P'
+" Git status
+if isdirectory(expand('~/.vim/plugged/fugitive', ':p'))
+  \ || isdirectory(expand('$VIM/vimfiles/plugged/fugitive', ':p'))
+  set statusline+='%{fugitive#statusline()}'
 endif
 " Syntastic status - makes sense with :Errors
-if isdirectory(expand('~/.vim/bundle/syntastic', ':p'))
-  set statusline+=%{SyntasticStatuslineFlag()}
+if isdirectory(expand('~/.vim/plugged/syntastic', ':p'))
+  \ || isdirectory(expand('$VIM/vimfiles/plugged/syntastic', ':p'))
+  set statusline+='%{SyntasticStatuslineFlag()}'
 endif
-" file type
-set statusline+=\[%{strlen(&ft)?&ft:'none'}]
-" right align remainder: character value, line, character, file position
-set statusline+=%=0x%-8B%-14(%l,%c%V%)%<%P
 " }}}
+" Always show the tabline
+set showtabline=2
 " Syntax highlighting on
 syntax on
-" Enable all python highlighting features
-let python_highlight_all=1
-" Show visible line under cursor's current line
-set cursorline
 " Set leader key to be able to use special mappings
 let mapleader=','
 let g:mapleader=','
@@ -242,14 +203,10 @@ set t_Co=256
 " Disable spellcheck & do not show editing mode
 " (vim-airline handles mode display)
 set nospell noshowmode
-" Statusline characters
-set fillchars+=stl:\ ,stlnc:\
 " Embedded terminal as UTF-8, regardless of terminal
 set termencoding=utf-8
 " Sessions to save open tabs and globals
 set sessionoptions+=tabpages,globals
-" Load 'matchit.vim'
-runtime macros/matchit.vim
 " Let window redraw take it's time
 set lazyredraw
 " Sets buffers to be hidden when abandoned, not unloaded
@@ -272,57 +229,56 @@ set ruler showcmd
 set incsearch ignorecase
 " Make /g flag default when doing :s
 set gdefault
-" line numbers, gutter width, enable wildmenu, completion mode to list all matches,
-" ignore certain filetypes for filename completions
-set number numberwidth=5 wildmenu wildmode=list:longest wildignore=*.sw*,*.pyc,*.bak
+" Line #s, no relative line #s, gutter width, enable wildmenu, completion mode
+" to list all matches, 
+set number numberwidth=5 norelativenumber wildmenu wildmode=list:longest
+" Ignore certain filetypes for filename completions
+set wildignore=*.sw*,*.pyc,*.bak,*.o,*.obj,*~
+set wildignore+=*vim/backups*
+set wildignore+=*node_modules/**
+set wildignore+=*sass-cache*
+set wildignore+=*DS_Store*
+set wildignore+=vendor/rails/**
+set wildignore+=vendor/cache/**
+set wildignore+=*.gem
+set wildignore+=log/**
+set wildignore+=tmp/**
+set wildignore+=*.png,*.jpg,*.gif
 " Warnings/errors visually and audibly
 set visualbell
-" Show matching brackets/parentheses/braces, bracket blinking
+" Matching brackets, bracket blinking
 set showmatch matchtime=2
-" Split new window below & to the right of current window
-set splitbelow splitright
+" Split new window below current one
+set splitbelow
 " Automatically read files changed outside of Vim
 set autoread
-" Have vim scroll like Linux, not Windows
+" Have Vim scroll like Linux, not Windows
 set scrolloff=1
+" Sets the format Vim uses to increment/decrement numbers in a sequence
+set nrformats=alpha,octal,hex
 " Reformatting options, see :help fo-table
 set formatoptions+=lnor1
 " Colors for omnicompletion popup menu
 highlight Pmenu guibg=brown gui=bold
 highlight Pmenu ctermbg=238 gui=bold
 " }}}
-" AutoCommands {{{
-" autocompletion
-au FileType css setlocal omnifunc=csscomplete#CompleteCSS
-au FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-au FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-au FileType python setlocal omnifunc=pythoncomplete#Complete
-au FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-" Normal text not break up long lines, fold on markers
-au FileType txt,none setlocal foldmethod=marker textwidth=0
-" XML fold on markers and not wrap
-au FileType xml,xhtml,svg,xsl,xslt,fo,rng setlocal foldmethod=marker textwidth=0
-" Java and C code fold on syntax
-au FileType java,c setlocal foldmethod=syntax textwidth=0
-" VimL fold on markers and have tab at 2 spaces
-au FileType vim setlocal foldmethod=marker tabstop=2 shiftwidth=2
-" Make XML/HTML files have a wrap with tag command using \w
-if has("mac") || has("gui_gtk") || has("gui_x11")
-    au Filetype html,xml source $HOME/.vim/plugin/wrapwithtag.vim
-elseif has("win32") || has("win64")
-    au Filetype html,xml source $VIM\vimfiles\plugin\wrapwithtag.vim
-endif
-" jsbeautify
-au FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
-au FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
-au FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
-" Rainbow Parentheses
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
-" }}}
 " Functions {{{
+" STChain() {{{
+"function! STChain()
+"  if &omnifunc != ''
+"    call SuperTabChain(&omnifunc, '<C-P>')
+"  endif
+"endfunction
+" }}}
+" CleverTab() {{{
+"function! CleverTab()
+"  if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
+"    return "\<Tab>"
+"  else
+"    return "\<C-X>\<C-O>"
+"  endif
+"endfunction
+" }}}
 " SmartTabComplete() {{{
 function! SmartTabComplete()
   let line = getline('.')                    " current line
@@ -330,14 +286,14 @@ function! SmartTabComplete()
                                              " line to one character right
                                              " of the cursor
   let substr = matchstr(substr, '[^ \t]*$')  " word till cursor
-  if (strlen(substr)==0)                     " nothing to match on empty string
+  if(strlen(substr)==0)                     " nothing to match on empty string
     return '\<tab>'
   endif
   let has_period = match(substr, '\.') != -1 " position of period, if any
   let has_slash = match(substr, '\/') != -1  " position of slash, if any
-  if (!has_period && !has_slash)
+  if(!has_period && !has_slash)
     return '\<C-X>\<C-P>' " existing text matching
-  elseif ( has_slash )
+  elseif(has_slash)
     return '\<C-X>\<C-F>' " file matching
   else
     return '\<C-X>\<C-O>' " plugin matching
@@ -392,13 +348,42 @@ endfunc
 set diffexpr=MyDiff()
 " }}}
 " }}}
+" AutoCommands {{{
+" SuperTab Chaining
+"au FileType * call STChain()
+" AutoCompletions
+au FileType css setlocal omnifunc=csscomplete#CompleteCSS
+au FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+au FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+au FileType python setlocal omnifunc=pythoncomplete#Complete
+au FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+" Normal text should not break up long lines, fold on markers
+au FileType txt,none setlocal foldmethod=marker textwidth=0
+" XHTML fold on markers and not wrap
+au FileType xhtml,svg,xsl,xslt,fo,rng setlocal foldmethod=marker textwidth=0 tabstop=2 shiftwidth=2
+" Java and C code fold on syntax
+au FileType java,c setlocal foldmethod=syntax textwidth=0
+" VimL fold on markers and have tab at 2 spaces
+au FileType vim setlocal foldmethod=marker tabstop=2 shiftwidth=2
+" Make XML/HTML files have a wrap with tag command using \w
+if !has('win32') || !has('win64')
+  au Filetype html,xml source $HOME/.vim/plugin/wrapwithtag.vim
+else
+  au Filetype html,xml source $VIM\vimfiles\plugin\wrapwithtag.vim
+endif
+" jsbeautify
+au FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
+au FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
+au FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
+" }}}
 " Mappings {{{
 " Completions {{{
-inoremap <tab> <c-r>=SmartTabComplete()<CR>
+"inoremap <Tab> <C-R>=CleverTab()<CR>
+inoremap <Tab> <C-R>=SmartTabComplete()<CR>
 " ide-popup.vim
-inoremap <expr> <CR>  pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-inoremap <expr> <C-n> pumvisible() ? '<C-n>' : '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-snoremap <expr> <C-p> pumvisible() ? '<C-n>' : '<C-p><C-r>=pumvisible() ? "\<lt>Up>" : ""<CR>'
+"inoremap <expr> <CR>  pumvisible() ? '\<C-y>' : '\<C-g>u\<CR>'
+"inoremap <expr> <C-n> pumvisible() ? '<C-n>' : '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+"snoremap <expr> <C-p> pumvisible() ? '<C-n>' : '<C-p><C-r>=pumvisible() ? "\<lt>Up>" : ""<CR>'
 " }}}
 " Jdl mapping - Ctrl-J
 noremap <D-J> <Esc>:normal Jdl<CR>
@@ -462,8 +447,6 @@ map <leader>g :GundoToggle<CR>
 " Rope (\[jr])
 map <leader>j :RopeGotoDefinition<CR>
 map <leader>r :RopeRename<CR>
-" NERDTree (\n)
-map <Leader>n :NERDTreeToggle<CR>
 " MakeGreen
 map <leader>dt :set makeprg=python\ manage.py\ test\|:call MakeGreen()<CR>
 " TaskList (\td)
@@ -487,11 +470,11 @@ let g:acp_enableAtStartup=1
 let g:acp_mappingDriven=0
 " }}}
 " SuperTab {{{
-let g:SuperTabDefaultCompletionType='<C-P>'
-let g:SuperTabDefaultCompletionType='<C-X><C-U>'
-let g:SuperTabDefaultCompletionType='<C-X><C-O>'
-let g:SuperTabNoCompleteAfter=['^', '\s', '\t']
+"let g:SuperTabDefaultCompletionType='<C-P>'
+"let g:SuperTabDefaultCompletionType='<C-X><C-O>'
+"let g:SuperTabDefaultCompletionType='<C-X><C-U>'
 let g:SuperTabDefaultCompletionType='context'
+let g:SuperTabNoCompleteAfter=['^', '\s', '\t']
 let g:SuperTabContextDefaultCompletionType='<C-X><C-U>'
 let g:SuperTabCompletionContexts=['s:ContextText', 's:ContextDiscover']
 let g:SuperTabContextTextOmniPrecedence=['&omnifunc', '&completefunc']
@@ -520,19 +503,33 @@ let g:airline_inactive_collapse=1
 if !exists('g:airline_symbols')
   let g:airline_symbols={}
 endif
-let g:airline_left_sep=''
-let g:airline_left_alt_sep=''
-let g:airline_right_sep=''
-let g:airline_right_alt_sep=''
-let g:airline_symbols.branch=''
-let g:airline_symbols.readonly=''
-let g:airline_symbols.linenr=''
+" Airline Symbols {{{
+if has('gui_macvim')
+  let g:airline_left_sep=''
+  let g:airline_left_alt_sep=''
+  let g:airline_right_sep=''
+  let g:airline_right_alt_sep=''
+  let g:airline_symbols.branch=''
+  let g:airline_symbols.readonly=''
+  let g:airline_symbols.linenr=''
+else
+  let g:airline_left_sep=''
+  let g:airline_left_alt_sep=''
+  let g:airline_right_sep=''
+  let g:airline_right_alt_sep=''
+  let g:airline_symbols.branch=''
+  let g:airline_symbols.readonly=''
+  let g:airline_symbols.linenr=''
+endif
+" }}}
+let g:airline#extensions#bufferline#enabled=1
+let g:airline#extensions#bufferline#overwrite_variables=1
 let g:airline#extensions#quickfix#quickfix_text='Quickfix'
 let g:airline#extensions#quickfix#location_text='Location'
 let g:airline#extensions#bufferline#enabled=1
 let g:airline#extensions#bufferline#overwrite_variables=1
 let g:airline#extensions#branch#enabled=1
-let g:airline#extensions#branch#empty_message=''
+let g:airline#extensions#branch#empty_message=''
 let g:airline#extensions#branch#displayed_head_limit=10
 let g:airline#extensions#branch#format=1
 let g:airline#extensions#syntastic#enabled=1
@@ -548,19 +545,38 @@ let g:airline#extensions#tabline#show_tab_nr=1
 let g:airline#extensions#tabline#formatter='default'
 let g:airline#extensions#tabline#show_close_button=1
 let g:airline#extensions#tabline#close_symbol='X'
-let g:airline#extensions#tmuxline#enabled=1
-let airline#extensions#tmuxline#color_template='normal'
+let g:airline#extensions#tmuxline#color_template='normal'
 let g:airline#extensions#promptline#enabled=1
-let airline#extensions#promptline#color_template='normal'
+let g:airline#extensions#promptline#color_template='normal'
 let g:airline#extensions#ctrlspace#enabled=1
 " }}}
-" vim-gitgutter {{{
-let g:gitgutter_max_signs = 500
+" Taboo.vim {{{ 
+let g:taboo_tabline=1
+let g:taboo_tab_format=' %n  %f%m '
+let g:taboo_renamed_tab_format=' %l:%n  %f%m '
+let g:taboo_modified_tab_flag='•'
+let g:taboo_close_tabs_label=''
+" }}}
+" vim-bufferline {{{
+" See ':help filename-modifiers'
+let g:bufferline_fname_mod = ':t'
+let g:bufferline_echo=1
+let g:bufferline_show_bufnr=1
+let g:bufferline_active_highlight='StatusLine'
+let g:bufferline_inactive_highlight='StatusLineNC'
+let g:bufferline_active_buffer_left='  '
+let g:bufferline_active_buffer_right='  '
+let g:bufferline_modified='•'
+" }}}
+" promptline.vim {{{
+let g:promptline_powerline_symbols=1
+let g:promptline_theme='airline'
+let g:promptline_preset='full'
 " }}}
 " Rainbow Parentheses {{{
-" oblitum/rainbow
+" oblitum/rainbow {{{
 let g:lisp_rainbow=1
-let g:rainbow_active=0
+let g:rainbow_active=1
 let g:rainbow_conf={ 'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
                    \ 'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
                    \ 'operators': '_,_',
@@ -572,27 +588,36 @@ let g:rainbow_conf={ 'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'fireb
                    \     'vim': { 'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'], },
                    \     'html': { 'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'], },
                    \     'css': 0,
-                   \ } }
-" klen/rainbow_parentheses.vim
-let g:rbpt_colorpairs=[
-  \ ['brown',       'RoyalBlue3'],
-  \ ['Darkblue',    'SeaGreen3'],
-  \ ['darkgray',    'DarkOrchid3'],
-  \ ['darkgreen',   'firebrick3'],
-  \ ['darkcyan',    'RoyalBlue3'],
-  \ ['darkred',     'SeaGreen3'],
-  \ ['darkmagenta', 'DarkOrchid3'],
-  \ ['brown',       'firebrick3'],
-  \ ['gray',        'RoyalBlue3'],
-  \ ['black',       'SeaGreen3'],
-  \ ['darkmagenta', 'DarkOrchid3'],
-  \ ['Darkblue',    'firebrick3'],
-  \ ['darkgreen',   'RoyalBlue3'],
-  \ ['darkcyan',    'SeaGreen3'],
-  \ ['darkred',     'DarkOrchid3'],
-  \ ['red',         'firebrick3'], ]
-let g:rbpt_max=16
-let g:rbpt_loadcmd_toggle = 0
+                   \ }}
+" }}}
+" klen/rainbow_parentheses.vim {{{
+"let g:rbpt_colorpairs=[
+" \ ['brown',       'RoyalBlue3'],
+" \ ['Darkblue',    'SeaGreen3'],
+" \ ['darkgray',    'DarkOrchid3'],
+" \ ['darkgreen',   'firebrick3'],
+" \ ['darkcyan',    'RoyalBlue3'],
+" \ ['darkred',     'SeaGreen3'],
+" \ ['darkmagenta', 'DarkOrchid3'],
+" \ ['brown',       'firebrick3'],
+" \ ['gray',        'RoyalBlue3'],
+" \ ['black',       'SeaGreen3'],
+" \ ['darkmagenta', 'DarkOrchid3'],
+" \ ['Darkblue',    'firebrick3'],
+" \ ['darkgreen',   'RoyalBlue3'],
+" \ ['darkcyan',    'SeaGreen3'],
+" \ ['darkred',     'DarkOrchid3'],
+" \ ['red',         'firebrick3'], ]
+"let g:rbpt_max=16
+"let g:rbpt_loadcmd_toggle = 0
+" }}}
+" }}}
+" vimfiler {{{
+let g:vimfiler_readonly_file_icon=''
+let g:vimfiler_file_icon=''
+let g:vimfiler_marked_file_icon=''
+let g:vimfiler_tree_opened_icon = '▾'
+let g:vimfiler_tree_closed_icon = '▸'
 " }}}
 " vim-force.com {{{
 if has('gui_macvim')
@@ -602,28 +627,121 @@ if has('gui_macvim')
   let g:apex_tooling_force_dot_com_path='/Library/Java/Extensions'
 endif
 " }}}
+" vim-support {{{
+"g:Vim_AdditionalTemplates=[]
+let g:Vim_LoadMenus='no'
+let g:Vim_RootMenu='&Vim\ Support'
+let g:Vim_MapLeader='\'
+" }}}
+" notebook {{{
+if !has('win32') || !has('win64')
+  let g:NotebookDir='~/Documents/Docs/notes'
+else
+  let g:NotebookDir='~\Documents\Docs\notes'
+endif
+" }}}
+" vim-notes {{{
+let g:notes_directories=['~/Documents/Docs/notes', '~/Dropbox/Notes']
+let g:notes_suffix='.txt'
+let g:notes_title_sync='change_title'
+"let g:notes_title_sync='rename_file'
+let g:notes_word_boundaries=1
+let g:notes_unicode_enabled=1
+let g:notes_smart_quotes=1
+let g:notes_list_bullets=['*','+','-','•', '◦', '▸', '▹', '▪', '▫']
+let g:notes_tab_indents=1
+let g:notes_alt_indents=1
+let g:notes_shadowdir='~/Documents/Docs/notes'
+let g:notes_conceal_code=1
+let g:notes_conceal_italic=1
+let g:notes_conceal_bold=1
+let g:notes_conceal_url=1
+" }}}
+" easymotion.vim {{{
+let g:EasyMotion_smartcase=1
+let g:EasyMotion_use_smartsign_us=1
+"let g:EasyMotion_enter_jump_first=1
+let g:EasyMotion_space_jump_first=1
+let g:EasyMotion_prompt='{n} '
+let g:EasyMotion_landing_highlight=1
+" }}}
+" easytags {{{
+let g:easytags_always_enabled=0
+if !has('win32') || !has('win64')
+  let g:easytags_cmd='/usr/local/bin/ctags'
+  let g:easytags_file='~/.vim/tags'
+  let g:easytags_resolve_links=1
+else
+  let g:easytags_cmd='$VIM\vim74\ctags.exe'
+  let g:easytags_file='~/_tags'
+endif
+let g:easytags_async=1
+let g:easytags_dynamic_files=1
+let g:easytags_autorecurse=1
+let g:easytags_include_members=1
+" }}}
+" matchit.vim
+let g:loaded_matchit=1
+" vim-gitgutter
+let g:gitgutter_max_signs=500
 " ag.vim
-let g:ackprg='ag --vimgrep'
-" Pyflakes
-let g:pyflakes_use_quickfix=0
-" XML.vim: Fold XML tags, enable XML plugin on editing HTML,
-"     set XML tag syntax prefixes,
+if !has('win32') || !has('win64')
+  let g:ackprg='ag --vimgrep'
+endif
+" XML.vim
+" enable XML plugin on editing HTML, use XML syntax folding
+let g:xml_no_auto_nesting=0
 let g:xml_use_html=1
 let g:xml_syntax_folding=1
-" VimClojure
-let g:vimclojure#ParenRainbow=1
-" NERDTree
-let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
-" Syntastic
+" Syntastic {{{
+" check syntax on opening a file
+let g:syntastic_check_on_open=1
+" skip syntax check on :wq, :x, and :ZZ
+let g:syntastic_check_on_wq=0
+" aggregate all errors that apply to a filetype
+let g:syntastic_aggregate_errors=1
+" enable quickfix signs in the gutter
 let g:syntastic_enable_signs=1
-let g:syntastic_mode_map={'mode': 'active', 'passive_filetypes': ['java']}
-" Taboo.vim
-let g:taboo_tab_format=' %n %f%m '
+" Syntastic signs symbol definitions
+let g:syntastic_error_symbol='✗'
+let g:syntastic_style_error_symbol='S'
+let g:syntastic_warning_symbol='⚠'
+let g:syntastic_style_warning_symbol='S'
+" Shows errors on hovering the mouse over a given error symbol or quickfix
+let g:syntastic_enable_balloons=1
+" Autojump to the first error, if any. If only warnings are found, doesn't jump
+let g:syntastic_auto_jump=3
+" Automatically open the location list on finding errors
+let g:syntastic_auto_loc_list=1
+" Disable writing python-mode lint checks to disk
+let g:pymode_lint_write=0
+" Mapping for filetypes
+let g:syntastic_filetype_map = { 'plaintex': 'tex', 'gentoo-metadata': 'xml' }
+" Mapping for modes
+let g:syntastic_mode_map = { 'mode': 'active', 'active_filetypes': [], 'passive_filetypes': ['java'] }
+" Syntastic debug log location
+let g:syntastic_debug_file = '~/Documents/Docs/logs/syntastic.log'
+" Default Shell
+"let g:syntastic_shell='/usr/local/bin/zsh'
+" }}}
+" WebDevIcons {{{
+" Use nifty icons
+let g:WebDevIconsOS='Darwin' 
+let g:webdevicons_enable=1
+let g:webdevicons_enable_ctrlp=1
+let g:webdevicons_enable_vimfiler=1
+let g:webdevicons_enable_nerdtree=1
+let g:webdevicons_enable_airline_tabline=1
+let g:webdevicons_enable_airline_statusline=1
+let g:webdevicons_enable_flagship_statusline=1
+if exists("g:loaded_webdevicons")
+  call webdevicons#refresh()
+endif
+" }}}
 " }}}
 " Filetype {{{
-" Turn on the filetype features, filetype plugins, and filetype indent now that
-" vundle is done loading
+" Turn on the filetype, filetype plugins, and filetype indent
 filetype on
 filetype plugin indent on
 " }}}
-" vim: fdm=marker ft=vim
+" vim: fdm=marker ts=2 sw=2 ft=vim
