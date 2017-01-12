@@ -16,28 +16,18 @@ set rtp+='$VIM\vimfiles\plugged'
 call plug#begin('$VIM\vimfiles\plugged')
 " Bundle List {{{
 " Bundles {{{
-"Plug 'gcmt/breeze.vim'
 "Plug 'itchyny/lightline.vim'
 "Plug 'kien/rainbow_parentheses.vim'
-"Plug 'mustache/vim-mustache-handlebars'
-"Plug 'powerline/fonts'
-"Plug 'tpope/vim-abolish'
-Plug 'Shougo/unite.vim'
 Plug 'Shougo/vimfiler.vim'
-Plug 'Shougo/vimshell.vim'
-Plug 'WolfgangMehner/c.vim'
-Plug 'WolfgangMehner/vim-plugins'
+"Plug 'WolfgangMehner/c.vim'
+"Plug 'WolfgangMehner/vim-plugins'
 Plug 'airblade/vim-gitgutter'
-Plug 'amix/open_file_under_cursor.vim'
-Plug 'amix/vim-zenroom2'
-Plug 'benmills/vimux'
 Plug 'bling/vim-airline'
 Plug 'bling/vim-bufferline'
 Plug 'chrisbra/csv.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dirkwallenstein/vim-autocomplpop'
 Plug 'easymotion/vim-easymotion'
-Plug 'ervandew/notebook'
 Plug 'ervandew/supertab'
 Plug 'gcmt/taboo.vim'
 Plug 'gregsexton/gitv'
@@ -48,21 +38,15 @@ Plug 'kshenoy/vim-signature'
 Plug 'luochen1990/rainbow'
 Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim'
-Plug 'oplatek/Conque-Shell'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'sjl/gundo.vim'
-Plug 'sophacles/vim-bundle-mako'
 Plug 'sukima/xmledit'
 Plug 'syngan/vim-vimlint'
-Plug 'szw/vim-ctrlspace'
 Plug 'terryma/vim-expand-region'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'therubymug/vim-pyte'
 Plug 'tmhedberg/matchit'
-Plug 'tomtom/enabler_vim'
-Plug 'tomtom/quickfixsigns_vim'
 Plug 'tpope/vim-afterimage'
 Plug 'tpope/vim-characterize'
 Plug 'tpope/vim-commentary'
@@ -77,25 +61,10 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'triglav/vim-visual-increment'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'will133/vim-dirdiff'
 Plug 'wincent/Command-T'
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
-" Google {{{
-" See also: https://github.com/google/vroom.git
-" IMPORTANT: Vim seems to be having issues using Python.
-" For now, any Python-dependant vim plugins should be disabled.
-"Plug 'glts/vim-magnum'
-"Plug 'glts/vim-radical'
-"Plug 'google/vim-codefmt'
-"Plug 'google/vim-coverage'
-"Plug 'google/vim-ft-vroom'
-"Plug 'google/vim-glaive'
-"Plug 'google/vim-maktaba'
-"Plug 'google/vim-searchindex'
-"Plug 'google/vim-syncopate'
-" }}}
 " Themes {{{
 "Plug 'itchyny/landscape.vim'
 Plug 'Colour-Sampler-Pack'
@@ -110,21 +79,9 @@ Plug 'wesgibbs/vim-irblack'
 " }}}
 " Platform-Specific {{{
 if !has('win32') || !has('win64')
-  Plug 'SirVer/ultisnips'
   Plug 'edkolev/promptline.vim'
-  Plug 'wincent/terminus'
-  Plug 'dag/vim-fish'
-  Plug 'klen/python-mode'
-  Plug 'wincent/ferret'
-  Plug 'mileszs/ack.vim'
-  Plug 'rking/ag.vim'
 else
   Plug 'msanders/snipmate.vim'
-endif
-if has('mac')
-  Plug 'rizzatti/dash.vim'
-  Plug 'kchmck/vim-coffee-script'
-  Plug 'neowit/vim-force.com'
 endif
 " }}}
 " vim-scripts {{{
@@ -483,13 +440,6 @@ let g:SuperTabRetainCompletionDuration='insert'
 let g:SuperTabCompleteCase='ignorcase'
 " }}}
 " }}}
-" Ultisnips {{{
-" let g:UltiSnipsExpandTrigger='<tab>'
-let g:UltiSnipsJumpForwardTrigger='<c-b>'
-let g:UltiSnipsJumpBackwardTrigger='<c-z>'
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit='vertical'
-" }}}
 " Vim Airline {{{
 " Theme for airline to use
 let g:airline_theme='light'
@@ -612,51 +562,6 @@ let g:rainbow_conf={ 'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'fireb
 "let g:rbpt_loadcmd_toggle = 0
 " }}}
 " }}}
-" vimfiler {{{
-let g:vimfiler_readonly_file_icon=''
-let g:vimfiler_file_icon=''
-let g:vimfiler_marked_file_icon=''
-let g:vimfiler_tree_opened_icon = '▾'
-let g:vimfiler_tree_closed_icon = '▸'
-" }}}
-" vim-force.com {{{
-if has('gui_macvim')
-  let g:apex_backup_folder='$HOME/Documents/Projects/sources/sf_backup'
-  let g:apex_temp_folder='$HOME/Documents/Projects/sources/sf_backup/temp'
-  let g:apex_properties_folder='$HOME/Documents/Projects/sources/sf_backup/resources'
-  let g:apex_tooling_force_dot_com_path='/Library/Java/Extensions'
-endif
-" }}}
-" vim-support {{{
-"g:Vim_AdditionalTemplates=[]
-let g:Vim_LoadMenus='no'
-let g:Vim_RootMenu='&Vim\ Support'
-let g:Vim_MapLeader='\'
-" }}}
-" notebook {{{
-if !has('win32') || !has('win64')
-  let g:NotebookDir='~/Documents/Docs/notes'
-else
-  let g:NotebookDir='~\Documents\Docs\notes'
-endif
-" }}}
-" vim-notes {{{
-let g:notes_directories=['~/Documents/Docs/notes', '~/Dropbox/Notes']
-let g:notes_suffix='.txt'
-let g:notes_title_sync='change_title'
-"let g:notes_title_sync='rename_file'
-let g:notes_word_boundaries=1
-let g:notes_unicode_enabled=1
-let g:notes_smart_quotes=1
-let g:notes_list_bullets=['*','+','-','•', '◦', '▸', '▹', '▪', '▫']
-let g:notes_tab_indents=1
-let g:notes_alt_indents=1
-let g:notes_shadowdir='~/Documents/Docs/notes'
-let g:notes_conceal_code=1
-let g:notes_conceal_italic=1
-let g:notes_conceal_bold=1
-let g:notes_conceal_url=1
-" }}}
 " easymotion.vim {{{
 let g:EasyMotion_smartcase=1
 let g:EasyMotion_use_smartsign_us=1
@@ -682,12 +587,6 @@ let g:easytags_include_members=1
 " }}}
 " matchit.vim
 let g:loaded_matchit=1
-" vim-gitgutter
-let g:gitgutter_max_signs=500
-" ag.vim
-if !has('win32') || !has('win64')
-  let g:ackprg='ag --vimgrep'
-endif
 " XML.vim
 " enable XML plugin on editing HTML, use XML syntax folding
 let g:xml_no_auto_nesting=0
@@ -723,20 +622,6 @@ let g:syntastic_mode_map = { 'mode': 'active', 'active_filetypes': [], 'passive_
 let g:syntastic_debug_file = '~/Documents/Docs/logs/syntastic.log'
 " Default Shell
 "let g:syntastic_shell='/usr/local/bin/zsh'
-" }}}
-" WebDevIcons {{{
-" Use nifty icons
-let g:WebDevIconsOS='Darwin' 
-let g:webdevicons_enable=1
-let g:webdevicons_enable_ctrlp=1
-let g:webdevicons_enable_vimfiler=1
-let g:webdevicons_enable_nerdtree=1
-let g:webdevicons_enable_airline_tabline=1
-let g:webdevicons_enable_airline_statusline=1
-let g:webdevicons_enable_flagship_statusline=1
-if exists("g:loaded_webdevicons")
-  call webdevicons#refresh()
-endif
 " }}}
 " }}}
 " Filetype {{{
