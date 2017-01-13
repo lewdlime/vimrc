@@ -1181,7 +1181,7 @@ function! s:spawn(name, cmd, opts)
       let job.lines   = [jid < 0 ? argv[0].' is not executable' :
             \ 'Invalid arguments (or job table is full)']
     endif
-  elseif 0
+  elseif s:vim8
     let jid = job_start(argv, {
     \ 'out_cb':   function('s:job_cb', ['s:job_out_cb',  job]),
     \ 'exit_cb':  function('s:job_cb', ['s:job_exit_cb', job]),
