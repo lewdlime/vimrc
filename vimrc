@@ -12,8 +12,8 @@ set magic
 " Vim-Plug {{{
 " Startup
 call pathogen#infect()
-set rtp+='$VIM\vimfiles\plugged'
-call plug#begin('$VIM\vimfiles\plugged')
+set rtp+='$HOME/.vim/plugged'
+call plug#begin('$HOME/.vim/plugged')
 " Bundle List {{{
 " Bundles {{{
 "Plug 'itchyny/lightline.vim'
@@ -67,7 +67,7 @@ Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
 " Themes {{{
 "Plug 'itchyny/landscape.vim'
-Plug 'Colour-Sampler-Pack'
+Plug 'vim-scripts/Colour-Sampler-Pack'
 Plug 'altercation/vim-colors-solarized'
 Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'crucerucalin/peaksea.vim'
@@ -85,16 +85,16 @@ else
 endif
 " }}}
 " vim-scripts {{{
-Plug 'AfterColors.vim'
-Plug 'DrawIt'
-Plug 'cecutil'
-Plug 'cppcomplete'
-Plug 'listmaps.vim'
-Plug 'mayansmoke'
-Plug 'nginx.vim'
-Plug 'taglist.vim'
-Plug 'utl.vim'
-Plug 'vim_faq'
+Plug 'vim-scripts/AfterColors.vim'
+Plug 'vim-scripts/DrawIt'
+Plug 'vim-scripts/cecutil'
+Plug 'vim-scripts/cppcomplete'
+Plug 'vim-scripts/listmaps.vim'
+Plug 'vim-scripts/mayansmoke'
+Plug 'vim-scripts/nginx.vim'
+Plug 'vim-scripts/taglist.vim'
+Plug 'vim-scripts/utl.vim'
+Plug 'vim-scripts/vim_faq'
 " }}}
 " Non-Github Repos {{{
 " ToDo
