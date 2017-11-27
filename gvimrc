@@ -26,7 +26,7 @@ else
     nmap <D-s> :w<CR>
     imap <D-s> <Esc>:w<CR>
     set macmeta
-  elseif has('gui_gtk2')
+  elseif has('gui_gtk2') || has('gui_gtk3')
     set guifont=Source\ Code\ Pro\ for\ Powerline
     set guifontwide=Source\ Code\ Pro\ for\ Powerline
     set lines=40 columns=180
